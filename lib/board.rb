@@ -1,7 +1,4 @@
+# Class that players play on
 class Board
-
-    def initialize
-        
-    end
-
+  def initialize; end
 end
