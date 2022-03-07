@@ -5,7 +5,8 @@ require './cell'
 board = Board.new
 puts "Welcome to Ruby Tic-Tac_Toe!\n"
 puts "User input will be based on numbers\n"
-board.display_grid_numbers
+board.display_game_interface
 puts 'Please enter an number that will select a space to play'
 user_input = gets.chomp
-puts user_input
+board.player_x_move(user_input)
+board.display_game_interface
