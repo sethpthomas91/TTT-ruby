@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'board'
 
 describe 'Board' do
@@ -20,11 +22,11 @@ describe 'Board' do
 end
 
 describe 'Board' do
-    it 'should change a cell symbol at a specified grid to O' do
-      board = Board.new
-      board.change_symbol_to_o_at(0)
-      input = board.grid[0].symbol
-      output = 'O'
-      expect(input).to eq(output)
-    end
+  it 'should change a cell symbol at a specified grid to O' do
+    board = Board.new
+    board.change_symbol_to_o_at(0)
+    input = board.grid[0].symbol
+    output = 'O'
+    expect(input).to eq(output)
   end
+end
