@@ -1,5 +1,6 @@
-# this class will be an individual cell that will change based on user input
+# frozen_string_literal: true
 
+# this class will be an individual cell that will change based on user input
 class Cell
   attr_reader :symbol, :grid_number
 
@@ -15,21 +16,16 @@ class Cell
   def make_x
     @symbol = 'X'
   end
-  
+
   def make_o
     @symbol = 'O'
   end
 
   def has_symbol
-    if @symbol === ' '
-      return false
-    else 
-      return true
-    end
+    @symbol != ' '
   end
 
   def game_display
-    self.has_symbol ? @symbol : @grid_number
+    has_symbol ? @symbol : @grid_number
   end
-  
 end
