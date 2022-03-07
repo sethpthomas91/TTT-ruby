@@ -2,15 +2,16 @@
 
 # Class that will hold all of the cells that players will change
 class Board
-  attr_reader :grid
+  attr_reader :grid, :has_winner
 
   def initialize
     @grid = create_blank_grid
+    @has_winner = false
   end
 
   def create_blank_grid
     blank_grid = []
-    cell_number = 0
+    cell_number = 1
     until blank_grid.length == 9
       new_cell = Cell.new
       new_cell.change_grid_number(cell_number)
@@ -59,6 +60,54 @@ class Board
   end
 
   def change_user_input_to_index(user_num_input)
-    user_num_input - 1
+    user_num_input.to_i - 1
+  end
+
+  def player_x_move(user_input)
+    index = change_user_input_to_index(user_input)
+    change_symbol_to_x_at(index)
+  end
+
+  def make_symbol_arr
+    symbol_arr = []
+    @grid.each do |cell|
+      symbol_arr << cell.symbol
+    end
+    symbol_arr
+  end
+
+  def check_for_horizontal_win
+    symbol_arr = make_symbol_arr
+    if (symbol_arr[0] != ' ') && arr_all_same(symbol_arr[0, 3])
+      true
+    elsif (symbol_arr[3] != ' ') && arr_all_same(symbol_arr[3, 3])
+      true
+    elsif (symbol_arr[6] != ' ') && arr_all_same(symbol_arr[6, 3])
+      true
+    else
+      false
+    end
+  end
+
+  def arr_all_same(arr)
+    arr.uniq.count <= 1
+  end
+
+  def check_for_vertical_win
+    symbol_arr = make_symbol_arr
+    # this is bad code. Lots of repeat
+    left_vert_arr = [symbol_arr[0], symbol_arr[3], symbol_arr[6]]
+    mid_vert_arr = [symbol_arr[1], symbol_arr[4], symbol_arr[7]]
+    right_vert_arr = [symbol_arr[2], symbol_arr[5], symbol_arr[8]]
+
+    if (symbol_arr[0] != ' ') && arr_all_same(left_vert_arr)
+      true
+    elsif (symbol_arr[1] != ' ') && arr_all_same(mid_vert_arr)
+      true
+    elsif (symbol_arr[2] != ' ') && arr_all_same(right_vert_arr)
+      true
+    else
+      false
+    end
   end
 end
