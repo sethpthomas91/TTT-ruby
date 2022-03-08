@@ -2,11 +2,10 @@
 
 # Class that will hold all of the cells that players will change
 class Board
-  attr_reader :grid, :has_winner
+  attr_reader :grid
 
   def initialize
     @grid = create_blank_grid
-    @has_winner = false
   end
 
   def create_blank_grid
@@ -68,6 +67,11 @@ class Board
     change_symbol_to_x_at(index)
   end
 
+  def player_o_move(user_input)
+    index = change_user_input_to_index(user_input)
+    change_symbol_to_o_at(index)
+  end
+
   def make_symbol_arr
     symbol_arr = []
     @grid.each do |cell|
@@ -76,8 +80,7 @@ class Board
     symbol_arr
   end
 
-  def check_for_horizontal_win
-    symbol_arr = make_symbol_arr
+  def check_for_horizontal_win(symbol_arr)
     if (symbol_arr[0] != ' ') && arr_all_same(symbol_arr[0, 3])
       true
     elsif (symbol_arr[3] != ' ') && arr_all_same(symbol_arr[3, 3])
@@ -93,8 +96,7 @@ class Board
     arr.uniq.count <= 1
   end
 
-  def check_for_vertical_win
-    symbol_arr = make_symbol_arr
+  def check_for_vertical_win(symbol_arr)
     # this is bad code. Lots of repeat
     left_vert_arr = [symbol_arr[0], symbol_arr[3], symbol_arr[6]]
     mid_vert_arr = [symbol_arr[1], symbol_arr[4], symbol_arr[7]]
@@ -110,4 +112,44 @@ class Board
       false
     end
   end
+
+  def check_for_diagonal_win(symbol_arr)
+    top_left_to_bottom_arr = [symbol_arr[0], symbol_arr[4], symbol_arr[8]]
+    top_right_to_bottom_arr = [symbol_arr[2], symbol_arr[4], symbol_arr[6]]
+
+    if (top_left_to_bottom_arr[0] != ' ') && arr_all_same(top_left_to_bottom_arr)
+      true
+    elsif (top_right_to_bottom_arr[0] != ' ') && arr_all_same(top_right_to_bottom_arr)
+      true
+    else
+      false
+    end
+  end
+
+  def valid_move?(cell)
+    !cell.has_symbol
+  end
+
+  def check_for_win
+    symbol_arr = make_symbol_arr
+    if check_for_diagonal_win(symbol_arr)
+      true
+    elsif check_for_horizontal_win(symbol_arr)
+      true
+    elsif check_for_vertical_win(symbol_arr)
+      true
+    else
+      false
+    end
+  end
+
+  def check_for_draw
+    symbol_arr = make_symbol_arr
+    if (symbol_arr[0] != ' ' && arr_all_same(symbol_arr))
+      true
+    else
+      false
+    end
+  end
+
 end
