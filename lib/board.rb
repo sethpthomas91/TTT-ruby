@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative './cell'
+
 # Class that will hold all of the cells that players will change
 class Board
   attr_reader :grid
@@ -145,11 +147,10 @@ class Board
 
   def check_for_draw
     symbol_arr = make_symbol_arr
-    if (symbol_arr[0] != ' ' && arr_all_same(symbol_arr))
+    if symbol_arr[0] != ' ' && arr_all_same(symbol_arr)
       true
     else
       false
     end
   end
-
 end
