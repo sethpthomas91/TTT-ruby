@@ -16,7 +16,7 @@ This program uses rspec for its tests. To run the spec file use "rspec" while in
 
 ## Running the game
 
-TBD
+To play the game, ensure that you have everything installed correctly then run ruby runner.rb.
 
 ## Contributors
 
