@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require './board'
-require './cell'
-require './UI'
+require_relative './board'
+require_relative './UI'
+
 board = Board.new
 ui = UI.new
 ui.welcome_message

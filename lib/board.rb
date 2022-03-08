@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative './cell'
+
 # Class that will hold all of the cells that players will change
 class Board
   attr_reader :grid
