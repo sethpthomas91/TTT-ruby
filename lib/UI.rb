@@ -9,10 +9,10 @@ class UI
       if valid_input(user_integer)
         break
       else
-        prompt_invalid_space
+        prompt_invalid_input
       end
     end
-    return input_to_int(user_input)
+    return user_integer
   end
 
   def input_to_int(user_input)
