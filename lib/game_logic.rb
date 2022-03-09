@@ -66,5 +66,4 @@ class GameLogic
   def arr_all_same(arr)
     arr.uniq.count <= 1
   end
-  
 end

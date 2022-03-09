@@ -2,6 +2,27 @@
 
 # this class will display messages to the user
 class UI
+  def get_user_input
+    while true
+      user_input = gets.chomp
+      user_integer = input_to_int(user_input)
+      if valid_input(user_integer)
+        break
+      else
+        prompt_invalid_space
+      end
+    end
+    user_input
+  end
+
+  def input_to_int(user_input)
+    user_input.to_i
+  end
+
+  def valid_input(integer)
+    integer > 9 || integer < 1 ? false : true
+  end
+
   def welcome_message
     puts "Welcome to Ruby Tic-Tac-Toe\n"
   end
@@ -54,4 +75,14 @@ class UI
     puts ''
   end
 
+  def turn_start(board)
+    display_game_interface(board)
+    prompt_for_turn
+  end
+
+  def player_x_win(board)
+    clear_terminal_screen
+    prompt_x_win
+    display_game_interface(board)
+  end
 end

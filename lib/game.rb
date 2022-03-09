@@ -33,14 +33,12 @@ class Game
   end
 
   def run_game_loop
-    winner = false
-    while winner == false
-      ui.display_game_interface(board)
-      ui.prompt_for_turn
-      user_input = gets.chomp
+    while game_logic.winning_board == false && game_logic.draw_board == false
+      ui.turn_start(board)
+      user_input = ui.get_user_input
       board.player_x_move(user_input)
       if game_logic.check_for_win(board.make_symbol_arr)
-        ui.prompt_x_win
+        ui.player_x_win(board)
         break
       elsif game_logic.check_for_draw(board.make_symbol_arr)
         ui.prompt_draw
@@ -48,9 +46,8 @@ class Game
       end
       ui.clear_terminal_screen
 
-      ui.display_game_interface(board)
-      ui.prompt_for_turn
-      user_input = gets.chomp
+      ui.turn_start(board)
+      user_input = ui.get_user_input
       board.player_o_move(user_input)
       if game_logic.check_for_win(board.make_symbol_arr)
         ui.prompt_o_win
