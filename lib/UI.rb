@@ -11,7 +11,11 @@ class UI
   end
 
   def prompt_for_turn
-    puts "Please enter an number that corresponds to a space\n"
+    print "Please enter an number that corresponds to a space: "
+  end
+
+  def clear_terminal_screen
+    system "clear"
   end
 
   def prompt_x_win
