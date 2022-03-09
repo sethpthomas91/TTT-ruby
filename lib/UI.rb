@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # this class will display messages to the user
 class UI
   def welcome_message
@@ -11,11 +13,11 @@ class UI
   end
 
   def prompt_for_turn
-    print "Please enter an number that corresponds to a space: "
+    print 'Please enter an number that corresponds to a space: '
   end
 
   def clear_terminal_screen
-    system "clear"
+    system 'clear'
   end
 
   def prompt_x_win
