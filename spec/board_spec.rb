@@ -148,7 +148,7 @@ RSpec.describe Board do
 
   describe '#check_for_win' do
     it 'should return false when there is no draw' do
-      input = board.check_for_draw
+      input = board.check_for_draw([])
       output = false
       expect(input).to eq(output)
     end
