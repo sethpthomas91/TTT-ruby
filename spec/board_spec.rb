@@ -36,18 +36,16 @@ RSpec.describe Board do
   end
 
   describe '#valid_move?' do
-    it 'should return false when a cell has already been played' do
+    it 'should return false when an index has already been played' do
       board.change_symbol_to_o_at(2)
-      input = board.valid_move?(board.grid[2])
-      output = false
-      expect(input).to eq(output)
+      expect(board.valid_move?(2)).to eq(false)
     end
   end
 
   describe '#valid_move?' do
     it 'should return true when a cell has not been played' do
       board.change_symbol_to_o_at(1)
-      expect(board.valid_move?(board.grid[2])).to eq(true)
+      expect(board.valid_move?(2)).to eq(true)
     end
   end
 

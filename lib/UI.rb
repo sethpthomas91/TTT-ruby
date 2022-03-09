@@ -12,7 +12,7 @@ class UI
         prompt_invalid_space
       end
     end
-    user_input
+    return input_to_int(user_input)
   end
 
   def input_to_int(user_input)
@@ -83,6 +83,12 @@ class UI
   def player_x_win(board)
     clear_terminal_screen
     prompt_x_win
+    display_game_interface(board)
+  end
+
+  def player_o_win(board)
+    clear_terminal_screen
+    prompt_o_win
     display_game_interface(board)
   end
 end

@@ -22,6 +22,10 @@ class Board
     blank_grid
   end
 
+  def fetch_cell(index)
+    @grid[index]
+  end
+
   def change_symbol_to_x_at(grid_index)
     @grid[grid_index].make_x
   end
@@ -52,7 +56,8 @@ class Board
     symbol_arr
   end
 
-  def valid_move?(cell)
+  def valid_move?(index)
+    cell = fetch_cell(index)
     !cell.has_symbol
   end
 end
