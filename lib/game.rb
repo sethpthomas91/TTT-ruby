@@ -2,22 +2,28 @@
 
 require_relative './Board'
 require_relative './UI'
+require_relative './game_logic'
 
 # this class will wrap the board, UI together
 class Game
-  attr_reader :board, :ui
+  attr_reader :board, :ui, :game_logic
 
   def initialize
     @board = create_new_board
-    @ui = create_new_UI
+    @ui = create_new_ui
+    @game_logic = create_game_logic
   end
 
   def create_new_board
     Board.new
   end
 
-  def create_new_UI
+  def create_new_ui
     UI.new
+  end
+
+  def create_game_logic
+    GameLogic.new
   end
 
   def welcome_user
@@ -33,10 +39,10 @@ class Game
       ui.prompt_for_turn
       user_input = gets.chomp
       board.player_x_move(user_input)
-      if board.check_for_win
+      if game_logic.check_for_win(board.make_symbol_arr)
         ui.prompt_x_win
         break
-      elsif board.check_for_draw
+      elsif game_logic.check_for_draw(board.make_symbol_arr)
         ui.prompt_draw
         break
       end
@@ -46,10 +52,10 @@ class Game
       ui.prompt_for_turn
       user_input = gets.chomp
       board.player_o_move(user_input)
-      if board.check_for_win
+      if game_logic.check_for_win(board.make_symbol_arr)
         ui.prompt_o_win
         break
-      elsif board.check_for_draw
+      elsif game_logic.check_for_draw(board.make_symbol_arr)
         ui.prompt_draw
         break
       end
