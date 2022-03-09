@@ -33,9 +33,8 @@ class Game
   end
 
   def run_game_loop
-    while game_logic.winning_board == false && game_logic.draw_board == false
+    while true
       ui.turn_start(board)
-      # have to work on this loop to validate that it is a good space to play
       while true
         user_input = ui.get_user_input
         if board.valid_move?(user_input)

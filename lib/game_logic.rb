@@ -22,7 +22,6 @@ class GameLogic
   end
 
   def check_for_vertical_win(symbol_arr)
-    # this is bad code. Lots of repeat
     left_vert_arr = [symbol_arr[0], symbol_arr[3], symbol_arr[6]]
     mid_vert_arr = [symbol_arr[1], symbol_arr[4], symbol_arr[7]]
     right_vert_arr = [symbol_arr[2], symbol_arr[5], symbol_arr[8]]
