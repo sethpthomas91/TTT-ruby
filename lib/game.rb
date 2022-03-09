@@ -35,7 +35,7 @@ class Game
   def run_game_loop
     winner = false
     while winner == false
-      board.display_game_interface
+      ui.display_game_interface(board)
       ui.prompt_for_turn
       user_input = gets.chomp
       board.player_x_move(user_input)
@@ -48,7 +48,7 @@ class Game
       end
       ui.clear_terminal_screen
 
-      board.display_game_interface
+      ui.display_game_interface(board)
       ui.prompt_for_turn
       user_input = gets.chomp
       board.player_o_move(user_input)

@@ -43,4 +43,15 @@ class UI
   def exit_message
     puts 'Thanks for playing!'
   end
+
+  def display_game_interface(board)
+    puts ''
+    puts "#{board.grid[0].game_display} | #{board.grid[1].game_display} | #{board.grid[2].game_display}"
+    puts '--+---+--'
+    puts "#{board.grid[3].game_display} | #{board.grid[4].game_display} | #{board.grid[5].game_display}"
+    puts '--+---+--'
+    puts "#{board.grid[6].game_display} | #{board.grid[7].game_display} | #{board.grid[8].game_display}"
+    puts ''
+  end
+
 end
