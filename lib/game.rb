@@ -35,7 +35,14 @@ class Game
   def run_game_loop
     while game_logic.winning_board == false && game_logic.draw_board == false
       ui.turn_start(board)
-      user_input = ui.get_user_input
+      # have to work on this loop to validate that it is a good space to play
+      while true
+        user_input = ui.get_user_input
+        if board.valid_move?(user_input)
+          break
+        end
+        ui.prompt_invalid_space
+      end
       board.player_x_move(user_input)
       if game_logic.check_for_win(board.make_symbol_arr)
         ui.player_x_win(board)
@@ -50,7 +57,7 @@ class Game
       user_input = ui.get_user_input
       board.player_o_move(user_input)
       if game_logic.check_for_win(board.make_symbol_arr)
-        ui.prompt_o_win
+        ui.player_o_win(board)
         break
       elsif game_logic.check_for_draw(board.make_symbol_arr)
         ui.prompt_draw
