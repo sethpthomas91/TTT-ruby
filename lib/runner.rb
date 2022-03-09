@@ -21,6 +21,7 @@ while winner == false
     ui.prompt_draw
     break
   end
+  ui.clear_terminal_screen
 
   board.display_game_interface
   ui.prompt_for_turn
@@ -33,6 +34,7 @@ while winner == false
     ui.prompt_draw
     break
   end
+  ui.clear_terminal_screen
 end
 
 ui.exit_message
