@@ -55,5 +55,4 @@ class Board
   def valid_move?(cell)
     !cell.has_symbol
   end
-
 end
