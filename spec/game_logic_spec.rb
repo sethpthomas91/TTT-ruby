@@ -68,14 +68,14 @@ RSpec.describe GameLogic do
   describe '#check_for_draw' do
     it 'should return false when no draw is present' do
       array = [' ', ' ', ' ', ' ', 'O', ' ', ' ', 'O', ' ']
-      expect(game_logic.check_for_draw(array)).to eq(false)
+      expect(game_logic.draw?(array)).to eq(false)
     end
   end
 
   describe '#check_for_draw' do
     it 'should return false when no draw is present' do
       array = %w[O X O O X O X O X]
-      expect(game_logic.check_for_draw(array)).to eq(true)
+      expect(game_logic.draw?(array)).to eq(true)
     end
   end
 end

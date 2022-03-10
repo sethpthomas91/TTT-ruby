@@ -21,11 +21,11 @@ class Cell
     @symbol = 'O'
   end
 
-  def has_symbol
+  def symbol?
     @symbol != ' '
   end
 
   def game_display
-    has_symbol ? @symbol : @grid_number
+    symbol? ? @symbol : @grid_number
   end
 end

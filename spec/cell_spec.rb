@@ -31,30 +31,30 @@ describe 'Cell.make_o' do
   end
 end
 
-describe 'Cell.has_symbol' do
+describe 'Cell.symbol?' do
   it 'should return false if it does not have a symbol that is X or O' do
     cell = Cell.new
-    input = cell.has_symbol
+    input = cell.symbol?
     output = false
     expect(input).to eq(output)
   end
 end
 
-describe 'Cell.has_symbol' do
+describe 'Cell.symbol?' do
   it 'should return true if it does  have a symbol that is X' do
     cell = Cell.new
     cell.make_x
-    input = cell.has_symbol
+    input = cell.symbol?
     output = true
     expect(input).to eq(output)
   end
 end
 
-describe 'Cell.has_symbol' do
+describe 'Cell.symbol?' do
   it 'should return true if it does  have a symbol that is Y' do
     cell = Cell.new
     cell.make_o
-    input = cell.has_symbol
+    input = cell.symbol?
     output = true
     expect(input).to eq(output)
   end
