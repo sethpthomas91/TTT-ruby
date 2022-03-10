@@ -33,63 +33,46 @@ class Game
   end
 
   def run_game_loop
-    # enter the game loop
-    while true
-
-      play_x_turn
-      ui.display_game_interface(board)
-      if game_logic.check_for_win(board.make_symbol_arr)
-        ui.player_x_win(board)
+    loop do
+      ui.turn_start(board)
+      user_input = ui.get_user_input
+      user_input = check_is_valid_move(user_input)
+      board.player_x_move(user_input)
+      symbol_arr = board.make_symbol_arr
+      if game_logic.check_for_win(symbol_arr)
+        ui.prompt_x_win
         break
-      elsif game_logic.check_for_draw(board.make_symbol_arr)
+      elsif game_logic.draw?(symbol_arr)
         ui.prompt_draw
         break
       end
-      # ui.clear_terminal_screen
+      ui.clear_terminal_screen
 
-
-      play_o_turn
-      ui.display_game_interface(board)
-      if game_logic.check_for_win(board.make_symbol_arr)
-        ui.player_o_win(board)
+      ui.turn_start(board)
+      user_input = ui.get_user_input
+      user_input = check_is_valid_move(user_input)
+      board.player_o_move(user_input)
+      symbol_arr = board.make_symbol_arr
+      if game_logic.check_for_win(symbol_arr)
+        ui.prompt_o_win
         break
-      elsif game_logic.check_for_draw(board.make_symbol_arr)
+      elsif game_logic.draw?(symbol_arr)
         ui.prompt_draw
         break
       end
-      # ui.clear_terminal_screen
+      ui.clear_terminal_screen
     end
-  end
-  # stuck on the loop letting invalid spaces still being called and approved
-  def play_x_turn
-    ui.turn_start(board)
-    valid_move = false
-    while true
-      user_input = ui.get_user_input
-      puts "Fetched X cell:", board.fetch_cell(user_input).symbol, "!"
-      if board.valid_move?(user_input)
-        break
-      end
-      ui.prompt_invalid_space
-    end
-    board.player_x_move(user_input)
   end
 
-  def play_o_turn
-    ui.turn_start(board)
-    valid_move = false
-    while true
-      user_input = ui.get_user_input
-      puts "Fetched O cell:", board.fetch_cell(user_input).symbol, "!"
-      if board.valid_move?(user_input)
-        break
-      end
+  def check_is_valid_move(user_input)
+    valid_move = board.valid_move?(user_input)
+    while valid_move == false
       ui.prompt_invalid_space
+      user_input = ui.get_user_input
+      valid_move = board.valid_move?(user_input)
     end
-    board.player_o_move(user_input)
+    return user_input
   end
-
-  
 
   def exit_game
     ui.exit_message

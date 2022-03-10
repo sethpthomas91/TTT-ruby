@@ -6,13 +6,11 @@ class UI
     while true
       user_input = gets.chomp
       user_integer = input_to_int(user_input)
-      if valid_input(user_integer)
-        break
-      else
-        prompt_invalid_input
-      end
+      break if valid_input(user_integer)
+
+      prompt_invalid_input
     end
-    return user_integer
+    user_integer
   end
 
   def input_to_int(user_input)

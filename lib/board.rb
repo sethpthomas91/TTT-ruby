@@ -22,7 +22,8 @@ class Board
     blank_grid
   end
 
-  def fetch_cell(index)
+  def fetch_cell(user_input)
+    index = user_input - 1
     @grid[index]
   end
 
@@ -56,10 +57,8 @@ class Board
     symbol_arr
   end
 
-  def valid_move?(index)
-    # cell = fetch_cell(index)
-    # !(fetch_cell(index).has_symbol)
-    # !cell.has_symbol
-    !(@grid[index].has_symbol)
+  def valid_move?(user_input)
+    index = user_input - 1
+    !@grid[index].symbol?
   end
 end
