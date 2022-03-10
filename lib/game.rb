@@ -33,16 +33,11 @@ class Game
   end
 
   def run_game_loop
+    # enter the game loop
     while true
-      ui.turn_start(board)
-      while true
-        user_input = ui.get_user_input
-        if board.valid_move?(user_input)
-          break
-        end
-        ui.prompt_invalid_space
-      end
-      board.player_x_move(user_input)
+
+      play_x_turn
+      ui.display_game_interface(board)
       if game_logic.check_for_win(board.make_symbol_arr)
         ui.player_x_win(board)
         break
@@ -50,11 +45,11 @@ class Game
         ui.prompt_draw
         break
       end
-      ui.clear_terminal_screen
+      # ui.clear_terminal_screen
 
-      ui.turn_start(board)
-      user_input = ui.get_user_input
-      board.player_o_move(user_input)
+
+      play_o_turn
+      ui.display_game_interface(board)
       if game_logic.check_for_win(board.make_symbol_arr)
         ui.player_o_win(board)
         break
@@ -62,9 +57,39 @@ class Game
         ui.prompt_draw
         break
       end
-      ui.clear_terminal_screen
+      # ui.clear_terminal_screen
     end
   end
+  # stuck on the loop letting invalid spaces still being called and approved
+  def play_x_turn
+    ui.turn_start(board)
+    valid_move = false
+    while true
+      user_input = ui.get_user_input
+      puts "Fetched X cell:", board.fetch_cell(user_input).symbol, "!"
+      if board.valid_move?(user_input)
+        break
+      end
+      ui.prompt_invalid_space
+    end
+    board.player_x_move(user_input)
+  end
+
+  def play_o_turn
+    ui.turn_start(board)
+    valid_move = false
+    while true
+      user_input = ui.get_user_input
+      puts "Fetched O cell:", board.fetch_cell(user_input).symbol, "!"
+      if board.valid_move?(user_input)
+        break
+      end
+      ui.prompt_invalid_space
+    end
+    board.player_o_move(user_input)
+  end
+
+  
 
   def exit_game
     ui.exit_message

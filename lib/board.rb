@@ -57,7 +57,9 @@ class Board
   end
 
   def valid_move?(index)
-    cell = fetch_cell(index)
-    !cell.has_symbol
+    # cell = fetch_cell(index)
+    # !(fetch_cell(index).has_symbol)
+    # !cell.has_symbol
+    !(@grid[index].has_symbol)
   end
 end
