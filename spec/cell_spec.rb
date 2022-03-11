@@ -51,7 +51,7 @@ describe 'Cell.symbol?' do
 end
 
 describe 'Cell.symbol?' do
-  it 'should return true if it does  have a symbol that is Y' do
+  it 'should return true if it does  have a symbol that is O' do
     cell = Cell.new
     cell.make_o
     input = cell.symbol?
