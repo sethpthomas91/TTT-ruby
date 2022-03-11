@@ -7,7 +7,7 @@ require_relative './game_logic'
 # this class will wrap the board, UI together
 class Game
   attr_reader :board, :ui, :game_logic
-
+  
   def initialize
     @board = create_new_board
     @ui = create_new_ui

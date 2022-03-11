@@ -14,6 +14,8 @@ Minimum ruby 2.6.8
 
 This program uses rspec for its tests. To run the spec file use "rspec" while in the program's directory to run the tests.
 
+For automatic testing you can use obervr by opening a split terminal, ensure that you are in the top level directory, and run "observr ./spec/test.watchr". This will automatically run your tests in that termainal any time files with the ".rb" extension are run.
+
 ## Running the game
 
 To play the game, ensure that you have everything installed correctly then run ruby runner.rb.
