@@ -7,8 +7,8 @@ require_relative './game_logic'
 # this class will wrap the board, UI together
 class Game
   attr_reader :board, :ui, :game_logic
-  
-  def initialize(board = Board.new, ui = Ui.new, game_logic = GameLogic.new)
+
+  def initialize(board = Board.new, ui = UI.new, game_logic = GameLogic.new)
     @board = board
     @ui = ui
     @game_logic = game_logic
@@ -71,7 +71,7 @@ class Game
       user_input = ui.get_user_input
       valid_move = board.valid_move?(user_input)
     end
-    return user_input
+    user_input
   end
 
   def exit_game
