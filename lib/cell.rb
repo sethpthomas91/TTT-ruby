@@ -13,14 +13,6 @@ class Cell
     @grid_number = new_number
   end
 
-  def make_x
-    @symbol = 'X'
-  end
-
-  def make_o
-    @symbol = 'O'
-  end
-
   def symbol?
     @symbol != ' '
   end
@@ -28,4 +20,9 @@ class Cell
   def game_display
     symbol? ? @symbol : @grid_number
   end
+
+  def change_symbol_to(new_symbol)
+    @symbol = new_symbol
+  end
+
 end

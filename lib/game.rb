@@ -3,6 +3,8 @@
 require_relative './Board'
 require_relative './UI'
 require_relative './game_logic'
+require_relative './computer_player'
+require_relative './human_player'
 
 # this class will wrap the board, UI together
 class Game
@@ -12,6 +14,8 @@ class Game
     @board = board
     @ui = ui
     @game_logic = game_logic
+    @player_one = HumanPlayer.new
+    @player_two = HumanPlayer.new('O')
   end
 
   def create_new_board
@@ -26,13 +30,24 @@ class Game
     GameLogic.new
   end
 
+  def check_is_valid_move(user_input)
+    valid_move = board.valid_move?(user_input)
+    while valid_move == false
+      ui.prompt_invalid_space
+      user_input = ui.get_user_input
+      valid_move = board.valid_move?(user_input)
+    end
+    user_input
+  end
+
   def run_game_loop
     loop do
       ui.turn_start(board)
       user_input = ui.get_user_input
       user_input = check_is_valid_move(user_input)
-      board.player_x_move(user_input)
+      board.player_move_at(@player_one, user_input)
       symbol_arr = board.make_symbol_arr
+
       if game_logic.check_for_win(symbol_arr)
         ui.prompt_x_win
         break
@@ -45,8 +60,9 @@ class Game
       ui.turn_start(board)
       user_input = ui.get_user_input
       user_input = check_is_valid_move(user_input)
-      board.player_o_move(user_input)
+      board.player_move_at(@player_two, user_input)
       symbol_arr = board.make_symbol_arr
+
       if game_logic.check_for_win(symbol_arr)
         ui.prompt_o_win
         break
@@ -56,16 +72,6 @@ class Game
       end
       ui.clear_terminal_screen
     end
-  end
-
-  def check_is_valid_move(user_input)
-    valid_move = board.valid_move?(user_input)
-    while valid_move == false
-      ui.prompt_invalid_space
-      user_input = ui.get_user_input
-      valid_move = board.valid_move?(user_input)
-    end
-    user_input
   end
 
   def exit_game

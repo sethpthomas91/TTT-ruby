@@ -11,26 +11,6 @@ describe 'Cell' do
   end
 end
 
-describe 'Cell.make_x' do
-  it 'should change symbol to X' do
-    cell = Cell.new
-    cell.make_x
-    input = cell.symbol
-    output = 'X'
-    expect(input).to eq(output)
-  end
-end
-
-describe 'Cell.make_o' do
-  it 'should change symbol to O' do
-    cell = Cell.new
-    cell.make_o
-    input = cell.symbol
-    output = 'O'
-    expect(input).to eq(output)
-  end
-end
-
 describe 'Cell.symbol?' do
   it 'should return false if it does not have a symbol that is X or O' do
     cell = Cell.new
@@ -43,19 +23,23 @@ end
 describe 'Cell.symbol?' do
   it 'should return true if it does  have a symbol that is X' do
     cell = Cell.new
-    cell.make_x
-    input = cell.symbol?
-    output = true
-    expect(input).to eq(output)
+    cell.change_symbol_to('X')
+    expect(cell.symbol?).to eq(true)
   end
 end
 
 describe 'Cell.symbol?' do
   it 'should return true if it does  have a symbol that is O' do
     cell = Cell.new
-    cell.make_o
-    input = cell.symbol?
-    output = true
-    expect(input).to eq(output)
+    cell.change_symbol_to('X')
+    expect(cell.symbol?).to eq(true)
+  end
+end
+
+describe 'Cell.change_symbol_to' do
+  it 'should change the mark to whatever is placed in the argument' do
+    cell = Cell.new
+    cell.change_symbol_to('X')
+    expect(cell.symbol).to eq('X')
   end
 end
