@@ -8,7 +8,7 @@ require_relative './game_logic'
 class Game
   attr_reader :board, :ui, :game_logic
   
-  def initialize(board = Board.new, ui = Ui.new, game_logic = GameLogic.new)
+  def initialize(board = Board.new, ui = UI.new, game_logic = GameLogic.new)
     @board = board
     @ui = ui
     @game_logic = game_logic
