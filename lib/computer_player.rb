@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ComputerPlayer
   attr_reader :marker
 
@@ -12,5 +14,4 @@ class ComputerPlayer
   def assign_marker_as(new_marker)
     marker = new_marker
   end
-
 end

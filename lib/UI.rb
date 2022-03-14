@@ -39,12 +39,8 @@ class UI
     system 'clear'
   end
 
-  def prompt_x_win
-    puts 'X wins!'
-  end
-
-  def prompt_o_win
-    puts 'O wins!'
+  def prompt_player_win(player)
+    puts "Player #{player.marker} has won!"
   end
 
   def prompt_draw
@@ -95,5 +91,4 @@ class UI
     welcome_message
     play_instructions
   end
-
 end
