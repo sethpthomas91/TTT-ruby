@@ -26,12 +26,6 @@ class Game
     GameLogic.new
   end
 
-  def welcome_user
-    ui.clear_terminal_screen
-    ui.welcome_message
-    ui.play_instructions
-  end
-
   def run_game_loop
     loop do
       ui.turn_start(board)
