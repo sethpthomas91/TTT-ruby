@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 class ComputerPlayer
-  attr_reader :marker
+  attr_reader :is_computer, :marker
 
-  def initialize(marker = 'O')
+  def initialize(marker = 'O', is_computer = true)
     @marker = marker
+    @is_computer = is_computer
   end
 
   def random_move

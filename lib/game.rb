@@ -15,7 +15,8 @@ class Game
     @ui = ui
     @game_logic = game_logic
     @player_one = HumanPlayer.new
-    @player_two = HumanPlayer.new('O')
+    # @player_two = HumanPlayer.new('O')
+    @player_two = ComputerPlayer.new('O')
   end
 
   def create_new_board
@@ -30,7 +31,7 @@ class Game
     GameLogic.new
   end
 
-  def check_is_valid_move(user_input)
+  def check_is_valid_human_move(user_input)
     valid_move = board.valid_move?(user_input)
     while valid_move == false
       ui.prompt_invalid_space
@@ -38,6 +39,15 @@ class Game
       valid_move = board.valid_move?(user_input)
     end
     user_input
+  end
+
+  def check_is_valid_computer_move(computer_input)
+    valid_move = board.valid_move?(computer_input)
+    while valid_move == false
+      computer_input = rand(1..9)
+      valid_move = board.valid_move?(computer_input)
+    end
+    computer_input
   end
 
   def run_game_loop
@@ -52,8 +62,13 @@ class Game
 
   def turn(player)
     ui.turn_start(board)
-    user_input = ui.get_user_input
-    user_input = check_is_valid_move(user_input)
+    if player.is_computer == true
+      user_input = player.random_move
+      user_input = check_is_valid_computer_move(user_input)
+    else
+      user_input = ui.get_user_input
+      user_input = check_is_valid_human_move(user_input)
+    end
     board.player_move_at(player, user_input)
   end
 
@@ -61,9 +76,11 @@ class Game
     ui.clear_terminal_screen
     symbol_arr = board.make_symbol_arr
     if game_logic.check_for_win(symbol_arr)
+      ui.display_game_interface(board)
       ui.prompt_player_win(player)
       true
     elsif game_logic.draw?(symbol_arr)
+      ui.display_game_interface(board)
       ui.prompt_draw
       true
     else
