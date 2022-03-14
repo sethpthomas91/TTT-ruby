@@ -4,7 +4,7 @@ require_relative './Game'
 
 def run_game
   game = Game.new
-  game.welcome_user
+  game.ui.welcome_user
   game.run_game_loop
   game.exit_game
 end

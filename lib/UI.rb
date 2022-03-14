@@ -89,4 +89,11 @@ class UI
     prompt_o_win
     display_game_interface(board)
   end
+
+  def welcome_user
+    clear_terminal_screen
+    welcome_message
+    play_instructions
+  end
+
 end
