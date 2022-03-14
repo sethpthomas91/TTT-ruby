@@ -18,7 +18,7 @@ For automatic testing you can use obervr by opening a split terminal, ensure tha
 
 ## Running the game
 
-To play the game, ensure that you have everything installed correctly then run ruby runner.rb.
+From the project root run `ruby runner.rb`
 
 ## Contributors
 
