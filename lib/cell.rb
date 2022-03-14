@@ -24,5 +24,4 @@ class Cell
   def change_symbol_to(new_symbol)
     @symbol = new_symbol
   end
-
 end

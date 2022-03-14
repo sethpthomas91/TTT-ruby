@@ -42,35 +42,32 @@ class Game
 
   def run_game_loop
     loop do
-      ui.turn_start(board)
-      user_input = ui.get_user_input
-      user_input = check_is_valid_move(user_input)
-      board.player_move_at(@player_one, user_input)
-      symbol_arr = board.make_symbol_arr
+      turn(@player_one)
+      break if winning_play?(@player_one) == true
 
-      if game_logic.check_for_win(symbol_arr)
-        ui.prompt_x_win
-        break
-      elsif game_logic.draw?(symbol_arr)
-        ui.prompt_draw
-        break
-      end
-      ui.clear_terminal_screen
+      turn(@player_two)
+      break if winning_play?(@player_two) == true
+    end
+  end
 
-      ui.turn_start(board)
-      user_input = ui.get_user_input
-      user_input = check_is_valid_move(user_input)
-      board.player_move_at(@player_two, user_input)
-      symbol_arr = board.make_symbol_arr
+  def turn(player)
+    ui.turn_start(board)
+    user_input = ui.get_user_input
+    user_input = check_is_valid_move(user_input)
+    board.player_move_at(player, user_input)
+  end
 
-      if game_logic.check_for_win(symbol_arr)
-        ui.prompt_o_win
-        break
-      elsif game_logic.draw?(symbol_arr)
-        ui.prompt_draw
-        break
-      end
-      ui.clear_terminal_screen
+  def winning_play?(player)
+    ui.clear_terminal_screen
+    symbol_arr = board.make_symbol_arr
+    if game_logic.check_for_win(symbol_arr)
+      ui.prompt_player_win(player)
+      true
+    elsif game_logic.draw?(symbol_arr)
+      ui.prompt_draw
+      true
+    else
+      false
     end
   end
 

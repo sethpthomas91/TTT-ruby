@@ -49,5 +49,4 @@ class Board
     player_marker = player.marker
     @grid[grid_index].change_symbol_to(player_marker)
   end
-
 end
