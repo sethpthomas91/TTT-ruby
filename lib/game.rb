@@ -8,15 +8,14 @@ require_relative './human_player'
 
 # this class will wrap the board, UI together
 class Game
-  attr_reader :board, :ui, :game_logic
+  attr_reader :board, :ui, :game_logic, :player_one, :player_two
 
-  def initialize(board = Board.new, ui = UI.new, game_logic = GameLogic.new)
+  def initialize(board = Board.new, ui = UI.new, game_logic = GameLogic.new, player_one, player_two)
     @board = board
     @ui = ui
     @game_logic = game_logic
-    @player_one = HumanPlayer.new
-    # @player_two = HumanPlayer.new('O')
-    @player_two = ComputerPlayer.new('O')
+    @player_one = player_one
+    @player_two = player_two
   end
 
   def create_new_board

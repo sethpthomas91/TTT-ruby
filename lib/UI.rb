@@ -24,6 +24,16 @@ class UI
   def welcome_message
     puts "Welcome to Ruby Tic-Tac-Toe\n"
   end
+  
+  def game_selection_prompt
+    puts "
+    Please make a selection from the choices below:
+
+    1. Human vs Human
+    2. Human vs Computer
+   "
+
+  end
 
   def play_instructions
     puts "The user will play using numbers on the keyboard.\n"
