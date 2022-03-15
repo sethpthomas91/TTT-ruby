@@ -14,11 +14,22 @@ class GameSetup
     @game = nil
   end
 
-
   def main_menu
-    human_vs_computer
-    game_builder
-    game.run_game_loop
+    ui.welcome_message
+    loop do
+      ui.game_selection_prompt
+      user_input = ui.get_menu_selection
+      if user_input == 1
+        human_vs_human
+      elsif user_input == 2
+        human_vs_computer
+      elsif user_input == 3
+        break
+      end
+      game_builder
+      game.run_game_loop
+    end
+    ui.exit_message
   end
 
   def human_vs_human
@@ -35,5 +46,4 @@ class GameSetup
     new_game = Game.new(@player_one, @player_two)
     @game = new_game
   end
-
 end

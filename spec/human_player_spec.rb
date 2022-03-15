@@ -14,5 +14,4 @@ RSpec.describe HumanPlayer do
       expect(human_player.assign_marker_as('O')).to eq('O')
     end
   end
-
 end

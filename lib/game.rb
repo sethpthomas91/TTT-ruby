@@ -18,18 +18,6 @@ class Game
     @player_two = player_two
   end
 
-  def create_new_board
-    Board.new
-  end
-
-  def create_new_ui
-    UI.new
-  end
-
-  def create_game_logic
-    GameLogic.new
-  end
-
   def check_is_valid_human_move(user_input)
     valid_move = board.valid_move?(user_input)
     while valid_move == false
@@ -85,9 +73,5 @@ class Game
     else
       false
     end
-  end
-
-  def exit_game
-    ui.exit_message
   end
 end

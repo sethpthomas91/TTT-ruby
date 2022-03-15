@@ -20,5 +20,4 @@ RSpec.describe ComputerPlayer do
       expect(computer_player.assign_marker_as('X')).to eq('X')
     end
   end
-  
 end
