@@ -24,6 +24,24 @@ class UI
     user_integer
   end
 
+  def get_human_play_first_input
+    while true
+      user_input = gets.chomp
+      user_integer = input_to_int(user_input)
+      break if user_integer == 1 || user_integer == 2
+
+      prompt_invalid_menu_selection 
+    end
+    user_integer
+  end
+
+  def prompt_play_first_question
+    print "Do you want to play first?
+1. yes
+2. no
+"
+  end
+
   def prompt_invalid_menu_selection
     puts 'Please select a valid option'
   end
