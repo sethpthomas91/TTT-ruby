@@ -39,5 +39,4 @@ RSpec.describe GameSetup do
   #     expect(game_setup.player_two.is_computer).to eq(false)
   #   end
   # end
-
 end

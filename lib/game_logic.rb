@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Class that will hold all of the rules and win states for the game
 class GameLogic
   attr_reader :winning_board, :draw_board

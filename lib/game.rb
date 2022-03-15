@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require_relative './board'
 require_relative './UI'
 require_relative './game_logic'
@@ -10,7 +8,7 @@ require_relative './human_player'
 class Game
   attr_reader :board, :ui, :game_logic, :player_one, :player_two
 
-  def initialize(board = Board.new, ui = UI.new, game_logic = GameLogic.new, player_one, player_two)
+  def initialize(player_one, player_two, board = Board.new, ui = UI.new, game_logic = GameLogic.new)
     @board = board
     @ui = ui
     @game_logic = game_logic

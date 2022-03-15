@@ -1,9 +1,8 @@
-# frozen_string_literal: true
-
+# This will be the human player class
 class HumanPlayer
   attr_reader :marker, :is_computer
 
-  def initialize(marker = 'X', is_computer = false)
+  def initialize(marker = 'X', is_computer: false)
     @marker = marker
     @is_computer = is_computer
   end

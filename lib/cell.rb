@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # this class will be an individual cell that will change based on user input
 class Cell
   attr_reader :symbol, :grid_number
