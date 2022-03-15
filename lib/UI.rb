@@ -13,6 +13,21 @@ class UI
     user_integer
   end
 
+  def get_menu_selection
+    while true
+      user_input = gets.chomp
+      user_integer = input_to_int(user_input)
+      break if user_integer < 4 && user_integer > 0
+
+      prompt_invalid_menu_selection
+    end
+    user_integer
+  end
+
+  def prompt_invalid_menu_selection
+    puts 'Please select a valid option'
+  end
+
   def input_to_int(user_input)
     user_input.to_i
   end
@@ -24,15 +39,15 @@ class UI
   def welcome_message
     puts "Welcome to Ruby Tic-Tac-Toe\n"
   end
-  
+
   def game_selection_prompt
     puts "
-    Please make a selection from the choices below:
+Please make a selection from the choices below:
 
-    1. Human vs Human
-    2. Human vs Computer
-   "
-
+1. Human vs Human
+2. Human vs Computer
+3. Exit
+"
   end
 
   def play_instructions

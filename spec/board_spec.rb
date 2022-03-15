@@ -8,7 +8,6 @@ RSpec.describe Board do
 
   it 'should create a new board that has nine (base one) objects' do
     expect(board.grid.length).to eq(9)
-    # avoid input vs output, use the actual arguments/functions in these
   end
 
   describe '#player_move_at' do
