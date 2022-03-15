@@ -23,5 +23,26 @@ RSpec.describe UI do
         expect(ui.get_user_input).to eq(1)
       end
     end
+
+    describe '#get_human_play_first_input' do
+      it 'should accept 1 as a valid input' do
+        ui.stub(gets: '1')
+        expect(ui.get_human_play_first_input).to eq(1)
+      end
+    end
+
+    describe '#get_human_play_first_input' do
+      it 'should accept 1 as a valid input' do
+        ui.stub(gets: '1')
+        expect(ui.get_human_play_first_input).not_to eq(4)
+      end
+    end
+
+    describe '#get_human_play_first_input' do
+      it 'should accept 1 as a valid input' do
+        ui.stub(gets: '2')
+        expect(ui.get_human_play_first_input).to eq(2)
+      end
+    end
   
   end

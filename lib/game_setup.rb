@@ -21,7 +21,7 @@ class GameSetup
         ui.game_selection_prompt
         user_input = ui.get_menu_selection
         if user_input == 1
-          human_vs_human
+          human_vs_human_builder
         elsif user_input == 2
           human_vs_computer
         elsif user_input == 3
@@ -33,14 +33,29 @@ class GameSetup
     ui.exit_message
   end
 
-  def human_vs_human
+  def human_vs_human_builder
     @player_one = HumanPlayer.new
     @player_two = HumanPlayer.new('O')
   end
 
-  def human_vs_computer
+  def human_vs_computer_builder
     @player_one = HumanPlayer.new
     @player_two = ComputerPlayer.new
+  end
+
+  def computer_vs_human_builder
+    @player_one = ComputerPlayer.new('X')
+    @player_two = HumanPlayer.new('O')
+  end
+
+  def human_vs_computer
+    ui.prompt_play_first_question
+    user_input = ui.get_human_play_first_input
+    if user_input == 1
+      human_vs_computer_builder
+    else
+      computer_vs_human_builder
+    end
   end
 
   def game_builder
