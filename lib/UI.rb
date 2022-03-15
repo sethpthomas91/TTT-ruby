@@ -99,18 +99,6 @@ Please make a selection from the choices below:
     prompt_for_turn
   end
 
-  def player_x_win(board)
-    clear_terminal_screen
-    prompt_x_win
-    display_game_interface(board)
-  end
-
-  def player_o_win(board)
-    clear_terminal_screen
-    prompt_o_win
-    display_game_interface(board)
-  end
-
   def welcome_user
     clear_terminal_screen
     welcome_message
