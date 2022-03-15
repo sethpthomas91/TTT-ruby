@@ -1,3 +1,7 @@
+# Project status
+
+![ruby-tests Actions Status](https://github.com/sethpthomas91/TTT-ruby/actions/workflows/github_actions.yml/badge.svg)
+
 # TTT-ruby
 
 This application runs a human vs human Tic-Tac-Toe command line game. To play simply follow the command prompts and submit an input from your keyboard. 
