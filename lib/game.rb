@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative './Board'
+require_relative './board'
 require_relative './UI'
 require_relative './game_logic'
 require_relative './computer_player'

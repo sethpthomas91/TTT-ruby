@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative './Game'
+require_relative './game'
 require_relative './game_setup'
 
 def run_game

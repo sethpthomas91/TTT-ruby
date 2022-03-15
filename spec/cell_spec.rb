@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'cell'
+require_relative '../lib/cell'
 
 describe 'Cell' do
   it 'should create a new cell that has a symbol of a blank string' do
