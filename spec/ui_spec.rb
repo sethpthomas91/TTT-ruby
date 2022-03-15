@@ -1,4 +1,4 @@
-require_relative '../lib/ui'
+require_relative '../lib/UI'
 require_relative '../lib/board'
 
 RSpec.describe UI do
