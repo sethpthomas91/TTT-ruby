@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # this class will display messages to the user
 class UI
   def get_user_input
@@ -17,7 +15,7 @@ class UI
     while true
       user_input = gets.chomp
       user_integer = input_to_int(user_input)
-      break if user_integer < 4 && user_integer > 0
+      break if user_integer < 4 && user_integer.positive?
 
       prompt_invalid_menu_selection
     end
@@ -28,9 +26,9 @@ class UI
     while true
       user_input = gets.chomp
       user_integer = input_to_int(user_input)
-      break if user_integer == 1 || user_integer == 2
+      break if [1, 2].include?(user_integer)
 
-      prompt_invalid_menu_selection 
+      prompt_invalid_menu_selection
     end
     user_integer
   end

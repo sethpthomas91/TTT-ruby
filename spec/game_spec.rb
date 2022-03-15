@@ -15,5 +15,4 @@ RSpec.describe Game do
       expect(game.check_is_valid_computer_move(1)).to eq(1)
     end
   end
-
 end
