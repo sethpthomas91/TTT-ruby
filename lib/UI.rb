@@ -120,4 +120,17 @@ Please make a selection from the choices below:
     welcome_message
     play_instructions
   end
+
+  def computer_thinking_message
+    puts "Thinking..."
+  end
+
+  def computer_delay
+    sleep(rand(1..2))
+  end
+
+  def computer_turn_message
+    computer_thinking_message
+    computer_delay
+  end
 end

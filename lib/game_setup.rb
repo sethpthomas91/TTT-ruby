@@ -27,6 +27,7 @@ class GameSetup
       when 3
         break
       end
+      ui.clear_terminal_screen
       game_builder
       game.run_game_loop
     end
@@ -49,6 +50,7 @@ class GameSetup
   end
 
   def human_vs_computer
+    ui.clear_terminal_screen
     ui.prompt_play_first_question
     user_input = ui.get_human_play_first_input
     if user_input == 1

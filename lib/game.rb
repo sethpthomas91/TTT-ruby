@@ -38,10 +38,10 @@ class Game
   def run_game_loop
     loop do
       turn(@player_one)
-      break if winning_play?(@player_one) == true
+      break if end_move?(@player_one) == true
 
       turn(@player_two)
-      break if winning_play?(@player_two) == true
+      break if end_move?(@player_two) == true
     end
   end
 
@@ -50,6 +50,7 @@ class Game
     if player.is_computer == true
       user_input = player.random_move
       user_input = check_is_valid_computer_move(user_input)
+      ui.computer_turn_message
     else
       user_input = ui.get_user_input
       user_input = check_is_valid_human_move(user_input)
@@ -57,14 +58,14 @@ class Game
     board.player_move_at(player, user_input)
   end
 
-  def winning_play?(player)
+  def end_move?(player)
     ui.clear_terminal_screen
     symbol_arr = board.make_symbol_arr
-    if game_logic.check_for_win(symbol_arr)
+    if winning_play?(symbol_arr)
       ui.display_game_interface(board)
       ui.prompt_player_win(player)
       true
-    elsif game_logic.draw?(symbol_arr)
+    elsif draw_play?(symbol_arr)
       ui.display_game_interface(board)
       ui.prompt_draw
       true
@@ -72,4 +73,13 @@ class Game
       false
     end
   end
+
+  def winning_play?(symbol_arr)
+    game_logic.check_for_win(symbol_arr)
+  end
+
+  def draw_play?(symbol_arr)
+    game_logic.draw?(symbol_arr)
+  end
+
 end
