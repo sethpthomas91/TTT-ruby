@@ -25,6 +25,8 @@ class GameSetup
       when 2
         human_vs_computer
       when 3
+        computer_vs_computer_builder
+      when 4
         break
       end
       ui.clear_terminal_screen
@@ -41,6 +43,11 @@ class GameSetup
 
   def human_vs_computer_builder
     @player_one = HumanPlayer.new
+    @player_two = ComputerPlayer.new
+  end
+
+  def computer_vs_computer_builder
+    @player_one = ComputerPlayer.new('X')
     @player_two = ComputerPlayer.new
   end
 

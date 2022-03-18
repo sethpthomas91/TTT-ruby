@@ -15,7 +15,7 @@ class UI
     while true
       user_input = gets.chomp
       user_integer = input_to_int(user_input)
-      break if user_integer < 4 && user_integer.positive?
+      break if user_integer < 5 && user_integer.positive?
 
       prompt_invalid_menu_selection
     end
@@ -62,7 +62,8 @@ Please make a selection from the choices below:
 
 1. Human vs Human
 2. Human vs Computer
-3. Exit
+3. Computer vs Computer
+4. Exit
 "
   end
 
@@ -122,7 +123,15 @@ Please make a selection from the choices below:
   end
 
   def computer_thinking_message
-    puts "Thinking..."
+    thinking_messages = [
+      "\nThinking...",
+      "\nHmmmmmmm...",
+      "\nClever move...",
+      "\nThis is my game!",
+      "\nWait....",
+
+    ]
+    puts thinking_messages[rand(5)]
   end
 
   def computer_delay
