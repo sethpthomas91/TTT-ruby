@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # this class will display messages to the user
 class UI
   def get_user_input
@@ -13,6 +11,39 @@ class UI
     user_integer
   end
 
+  def get_menu_selection
+    while true
+      user_input = gets.chomp
+      user_integer = input_to_int(user_input)
+      break if user_integer < 4 && user_integer.positive?
+
+      prompt_invalid_menu_selection
+    end
+    user_integer
+  end
+
+  def get_human_play_first_input
+    while true
+      user_input = gets.chomp
+      user_integer = input_to_int(user_input)
+      break if [1, 2].include?(user_integer)
+
+      prompt_invalid_menu_selection
+    end
+    user_integer
+  end
+
+  def prompt_play_first_question
+    print "Do you want to play first?
+1. yes
+2. no
+"
+  end
+
+  def prompt_invalid_menu_selection
+    puts 'Please select a valid option'
+  end
+
   def input_to_int(user_input)
     user_input.to_i
   end
@@ -23,6 +54,16 @@ class UI
 
   def welcome_message
     puts "Welcome to Ruby Tic-Tac-Toe\n"
+  end
+
+  def game_selection_prompt
+    puts "
+Please make a selection from the choices below:
+
+1. Human vs Human
+2. Human vs Computer
+3. Exit
+"
   end
 
   def play_instructions
@@ -39,12 +80,8 @@ class UI
     system 'clear'
   end
 
-  def prompt_x_win
-    puts 'X wins!'
-  end
-
-  def prompt_o_win
-    puts 'O wins!'
+  def prompt_player_win(player)
+    puts "Player #{player.marker} has won!"
   end
 
   def prompt_draw
@@ -78,15 +115,22 @@ class UI
     prompt_for_turn
   end
 
-  def player_x_win(board)
+  def welcome_user
     clear_terminal_screen
-    prompt_x_win
-    display_game_interface(board)
+    welcome_message
+    play_instructions
   end
 
-  def player_o_win(board)
-    clear_terminal_screen
-    prompt_o_win
-    display_game_interface(board)
+  def computer_thinking_message
+    puts "Thinking..."
+  end
+
+  def computer_delay
+    sleep(rand(1..2))
+  end
+
+  def computer_turn_message
+    computer_thinking_message
+    computer_delay
   end
 end

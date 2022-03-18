@@ -1,34 +1,27 @@
-# frozen_string_literal: true
-
 require_relative '../lib/board'
+require_relative '../lib/computer_player'
 
 RSpec.describe Board do
   let(:board) { Board.new }
 
   it 'should create a new board that has nine (base one) objects' do
     expect(board.grid.length).to eq(9)
-    # avoid input vs output, use the actual arguments/functions in these
   end
 
-  describe '#change_symbol_to_x_at' do
-    it 'should change a cell symbol at a specified grid to X' do
-      board.change_symbol_to_x_at(0)
+  describe '#player_move_at' do
+    it 'should change a cell symbol at a specified grid to the player mark' do
+      user_input = 1
+      player = ComputerPlayer.new('X')
+      board.player_move_at(player, user_input)
       expect(board.grid[0].symbol).to eq('X')
-    end
-  end
-
-  describe '#change_symbol_to_o_at' do
-    it 'should change a cell symbol at a specified grid to O' do
-      board.change_symbol_to_o_at(0)
-      expect(board.grid[0].symbol).to eq('O')
     end
   end
 
   describe '#make_symbol_arr' do
     it 'should return a correct symbol array' do
-      board.change_symbol_to_o_at(0)
-      board.change_symbol_to_o_at(1)
-      board.change_symbol_to_o_at(2)
+      board.grid[0].change_symbol_to('O')
+      board.grid[1].change_symbol_to('O')
+      board.grid[2].change_symbol_to('O')
       input = board.make_symbol_arr
       output = ['O', 'O', 'O', ' ', ' ', ' ', ' ', ' ', ' ']
       expect(input).to eq(output)
@@ -37,8 +30,10 @@ RSpec.describe Board do
 
   describe '#valid_move?' do
     it 'should return false when an index has already been played' do
-      board.change_symbol_to_o_at(1)
-      expect(board.valid_move?(2)).to eq(false)
+      player = ComputerPlayer.new('X')
+      user_input = 1
+      board.player_move_at(player, user_input)
+      expect(board.valid_move?(1)).to eq(false)
     end
   end
 

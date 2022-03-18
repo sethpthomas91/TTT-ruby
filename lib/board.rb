@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require_relative './cell'
 
 # Class that will hold all of the cells
@@ -27,26 +25,8 @@ class Board
     @grid[index]
   end
 
-  def change_symbol_to_x_at(grid_index)
-    @grid[grid_index].make_x
-  end
-
-  def change_symbol_to_o_at(grid_index)
-    @grid[grid_index].make_o
-  end
-
   def change_user_input_to_index(user_num_input)
     user_num_input.to_i - 1
-  end
-
-  def player_x_move(user_input)
-    index = change_user_input_to_index(user_input)
-    change_symbol_to_x_at(index)
-  end
-
-  def player_o_move(user_input)
-    index = change_user_input_to_index(user_input)
-    change_symbol_to_o_at(index)
   end
 
   def make_symbol_arr
@@ -60,5 +40,11 @@ class Board
   def valid_move?(user_input)
     index = user_input - 1
     !@grid[index].symbol?
+  end
+
+  def player_move_at(player, user_input)
+    grid_index = change_user_input_to_index(user_input)
+    player_marker = player.marker
+    @grid[grid_index].change_symbol_to(player_marker)
   end
 end
