@@ -37,19 +37,19 @@ class Game
 
   def run_game_loop
     loop do
-      turn(@player_one)
+      turn(@player_one, @player_two)
       break if end_move?(@player_one) == true
 
-      turn(@player_two)
+      turn(@player_two, @player_one)
       break if end_move?(@player_two) == true
     end
   end
 
-  def turn(player)
+  def turn(player, other_player)
     ui.turn_start(board)
     if player.is_computer == true
-      if player.is_unbeatable    
-        user_input = best_move(board, player)
+      if player.is_unbeatable
+        user_input = best_move(board, player, other_player)
       elsif player.is_unbeatable == false
         user_input = player.random_move
         user_input = check_is_valid_computer_move(user_input)
@@ -92,7 +92,7 @@ class Game
     'unbeatable_loss' => -1
   }
 
-  def best_move(board, maximizing_player)
+  def best_move(board, maximizing_player, minimizing_player)
     best_score = -100
     move = nil
     board.grid.each do |cell|
@@ -100,7 +100,7 @@ class Game
 
       cell_number = cell.grid_number
       board.player_move_at(maximizing_player, cell_number)
-      score = minimax(board, 0, false)
+      score = minimax(board, 0, false, maximizing_player, minimizing_player)
       board.player_undo_move_at(cell_number)
       if score > best_score
         best_score = score
@@ -110,7 +110,42 @@ class Game
     move
   end
 
-  def minimax(current_board, _depth, is_maximizing)
-    1
+  def minimax(current_board, depth, is_maximizing, maximizing_player, minimizing_player)
+    symbol_arr = current_board.make_symbol_arr
+    if game_logic.draw?(symbol_arr)
+      return 0
+      # # elsif maximizing_player_win?
+      # return 1
+      # # elsif maximizing_player_loss?
+      # return -1
+    else 
+      return 1
+    end
+
+    if is_maximizing
+      best_score = -100
+      current_board.grid.each do |cell|
+        next if cell.symbol?
+
+        cell_number = cell.grid_number
+        board.player_move_at(maximizing_player, cell_number)
+        score = minimax(board, depth + 1, false, maximizing_player, minimizing_player)
+        board.player_undo_move_at(cell_number)
+        best_score = max(score, best_score)
+      end
+      best_score
+    else
+      best_score = 100
+      current_board.grid.each do |cell|
+        next if cell.symbol?
+
+        cell_number = cell.grid_number
+        board.player_move_at(minimizing_player, cell_number)
+        score = minimax(board, depth + 1, true, maximizing_player, minimizing_player)
+        board.player_undo_move_at(cell_number)
+        best_score = min(score, best_score)
+      end
+      best_score
+    end
   end
 end
