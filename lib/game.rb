@@ -48,8 +48,12 @@ class Game
   def turn(player)
     ui.turn_start(board)
     if player.is_computer == true
-      user_input = player.random_move
-      user_input = check_is_valid_computer_move(user_input)
+      if player.is_unbeatable    
+        user_input = best_move(board, player)
+      elsif player.is_unbeatable == false
+        user_input = player.random_move
+        user_input = check_is_valid_computer_move(user_input)
+      end
       ui.computer_turn_message
     else
       user_input = ui.get_user_input
@@ -80,5 +84,33 @@ class Game
 
   def draw_play?(symbol_arr)
     game_logic.draw?(symbol_arr)
+  end
+
+  minimax_scoring = {
+    'unbeatable_win' => 1,
+    'draw' => 0,
+    'unbeatable_loss' => -1
+  }
+
+  def best_move(board, maximizing_player)
+    best_score = -100
+    move = nil
+    board.grid.each do |cell|
+      next if cell.symbol?
+
+      cell_number = cell.grid_number
+      board.player_move_at(maximizing_player, cell_number)
+      score = minimax(board, 0, false)
+      board.player_undo_move_at(cell_number)
+      if score > best_score
+        best_score = score
+        move = cell_number
+      end
+    end
+    move
+  end
+
+  def minimax(current_board, _depth, is_maximizing)
+    1
   end
 end

@@ -44,6 +44,7 @@ class GameSetup
   def human_vs_computer_builder
     @player_one = HumanPlayer.new
     @player_two = ComputerPlayer.new
+    @player_two.make_unbeatable
   end
 
   def computer_vs_computer_builder

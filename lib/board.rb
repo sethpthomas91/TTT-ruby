@@ -47,4 +47,9 @@ class Board
     player_marker = player.marker
     @grid[grid_index].change_symbol_to(player_marker)
   end
+
+  def player_undo_move_at(user_input)
+    grid_index = change_user_input_to_index(user_input)
+    @grid[grid_index].remove_symbol
+  end
 end
