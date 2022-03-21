@@ -114,12 +114,10 @@ class Game
     symbol_arr = current_board.make_symbol_arr
     if game_logic.draw?(symbol_arr)
       return 0
-      # # elsif maximizing_player_win?
-      # return 1
-      # # elsif maximizing_player_loss?
-      # return -1
-    else 
+    elsif game_logic.return_winner_symbol(symbol_arr) == maximizing_player.marker
       return 1
+    elsif game_logic.return_winner_symbol(symbol_arr) == minimizing_player.marker
+      return -1
     end
 
     if is_maximizing
@@ -131,7 +129,7 @@ class Game
         board.player_move_at(maximizing_player, cell_number)
         score = minimax(board, depth + 1, false, maximizing_player, minimizing_player)
         board.player_undo_move_at(cell_number)
-        best_score = max(score, best_score)
+        best_score = [score, best_score].max
       end
       best_score
     else
@@ -143,7 +141,7 @@ class Game
         board.player_move_at(minimizing_player, cell_number)
         score = minimax(board, depth + 1, true, maximizing_player, minimizing_player)
         board.player_undo_move_at(cell_number)
-        best_score = min(score, best_score)
+        best_score = [score, best_score].min
       end
       best_score
     end
