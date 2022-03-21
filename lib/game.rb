@@ -81,5 +81,4 @@ class Game
   def draw_play?(symbol_arr)
     game_logic.draw?(symbol_arr)
   end
-
 end

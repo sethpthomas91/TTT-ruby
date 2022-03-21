@@ -128,8 +128,7 @@ Please make a selection from the choices below:
       "\nHmmmmmmm...",
       "\nClever move...",
       "\nThis is my game!",
-      "\nWait....",
-
+      "\nWait...."
     ]
     puts thinking_messages[rand(5)]
   end

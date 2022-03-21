@@ -22,9 +22,7 @@ RSpec.describe Board do
       board.grid[0].change_symbol_to('O')
       board.grid[1].change_symbol_to('O')
       board.grid[2].change_symbol_to('O')
-      input = board.make_symbol_arr
-      output = ['O', 'O', 'O', ' ', ' ', ' ', ' ', ' ', ' ']
-      expect(input).to eq(output)
+      expect(board.make_symbol_arr).to eq(['O', 'O', 'O', ' ', ' ', ' ', ' ', ' ', ' '])
     end
   end
 
