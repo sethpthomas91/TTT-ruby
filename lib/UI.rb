@@ -44,8 +44,8 @@ class UI
     user_integer
   end
 
-  def prompt_set_unbeatable
-    puts "Do you want the computer to be unbeatable?
+  def prompt_set_unbeatable(player)
+    puts "Do you want computer player #{player.marker} to be unbeatable?
 1. yes
 2. no
 "
@@ -91,8 +91,8 @@ Please make a selection from the choices below:
     puts "Don't worry if you entered a wrong value, the computer will just reprompt you.\n"
   end
 
-  def prompt_for_turn
-    print 'Please enter an number that corresponds to a space: '
+  def prompt_for_turn(player)
+    puts "Player #{player.marker}, please enter an number that corresponds to a space: "
   end
 
   def clear_terminal_screen
@@ -129,9 +129,9 @@ Please make a selection from the choices below:
     puts ''
   end
 
-  def turn_start(board)
+  def turn_start(board, player)
     display_game_interface(board)
-    prompt_for_turn
+    prompt_for_turn(player)
   end
 
   def welcome_user

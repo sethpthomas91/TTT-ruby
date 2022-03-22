@@ -1,7 +1,7 @@
 require_relative '../lib/cell'
 
 RSpec.describe Cell do
-  let(:cell) { Cell.new}
+  let(:cell) { Cell.new }
 
   it 'should create a new cell that has a symbol of a blank string' do
     expect(cell.symbol).to eq(' ')
@@ -33,5 +33,4 @@ RSpec.describe Cell do
       expect(cell.symbol).to eq('Q')
     end
   end
-
 end

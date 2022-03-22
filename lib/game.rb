@@ -46,7 +46,7 @@ class Game
   end
 
   def turn(player, other_player)
-    ui.turn_start(board)
+    ui.turn_start(board, player)
     if player.is_computer == true
       if player.is_unbeatable
         user_input = best_move(board, player, other_player)
@@ -125,7 +125,6 @@ class Game
         current_board.player_undo_move_at(cell_number)
         best_score = [score, best_score].max
       end
-      best_score
     else
       best_score = 100
       current_board.grid.each do |cell|
@@ -137,7 +136,7 @@ class Game
         current_board.player_undo_move_at(cell_number)
         best_score = [score, best_score].min
       end
-      best_score
     end
+    best_score
   end
 end

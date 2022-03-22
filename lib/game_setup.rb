@@ -15,6 +15,7 @@ class GameSetup
   end
 
   def main_menu
+    ui.clear_terminal_screen
     ui.welcome_message
     loop do
       ui.game_selection_prompt
@@ -42,8 +43,7 @@ class GameSetup
   end
 
   def return_user_input
-   input = gets.chomp
-   input
+    gets.chomp
   end
 
   def human_vs_computer_builder
@@ -82,7 +82,7 @@ class GameSetup
 
   def computer_difficulty_setter(player)
     loop do
-      ui.prompt_set_unbeatable
+      ui.prompt_set_unbeatable(player)
       user_input = ui.binary_choice_input
       case user_input
       when 1

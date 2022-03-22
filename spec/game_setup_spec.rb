@@ -22,7 +22,7 @@ RSpec.describe GameSetup do
   describe '#return_user_input' do
     it 'should recieve user input and return that user input' do
       allow($stdin).to receive(:gets).and_return('1')
-      something = $stdin.gets 
+      something = $stdin.gets
       expect(something).to eq('1')
     end
   end

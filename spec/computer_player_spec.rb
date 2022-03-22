@@ -20,4 +20,11 @@ RSpec.describe ComputerPlayer do
       expect(computer_player.assign_marker_as('X')).to eq('X')
     end
   end
+
+  describe '#make_unbeatable' do
+    it 'should change the setting of the computer to unbeatable' do
+      computer_player.make_unbeatable
+      expect(computer_player.is_unbeatable).to eq(true)
+    end
+  end
 end

@@ -45,7 +45,7 @@ RSpec.describe Game do
 
   describe '#draw_play?' do
     it 'should return false if the board does have a draw' do
-      symbol_arr = ['X', 'O', 'X', 'O', 'X', 'O', 'X', 'O', 'X']
+      symbol_arr = %w[X O X O X O X O X]
       expect(game.draw_play?(symbol_arr)).to eq(true)
     end
   end
