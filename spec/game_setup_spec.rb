@@ -26,7 +26,16 @@ RSpec.describe GameSetup do
       expect(something).to eq('1')
     end
   end
-
+# FAILING TEST BELOW
+  describe '#computer_difficulty_setter' do
+    it 'should recieve user input and set player to ubeatable' do
+      allow($stdin).to receive(:gets).and_return('1')
+      player = ComputerPlayer.new
+      allow(game_setup.computer_difficulty_setter(player)).to receive($stdin) { '1' }
+      expect(player.is_unbeatable).to eq(true)
+    end
+  end
+# FAILING TEST ABOVE
   describe '#set_unbeatable_computer' do
     it 'should set the computer player as unbeatable' do
       game_setup = GameSetup.new
