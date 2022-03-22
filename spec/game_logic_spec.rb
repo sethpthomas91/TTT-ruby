@@ -57,7 +57,7 @@ RSpec.describe GameLogic do
   end
 
   describe '#check_for_win' do
-    it 'should return true when a winning condition is present' do
+    it 'should return false when no winning condition is present' do
       array = [' ', ' ', ' ', ' ', 'O', ' ', ' ', 'O', ' ']
       expect(game_logic.check_for_win(array)).to eq(false)
     end
@@ -74,6 +74,20 @@ RSpec.describe GameLogic do
     it 'should return false when no draw is present' do
       array = %w[O X O O X O X O X]
       expect(game_logic.draw?(array)).to eq(true)
+    end
+  end
+
+  describe '#return_winner_symbol' do
+    it 'should return the winng symbol when a winning condition is present' do
+      array = [' ', 'O', ' ', ' ', 'O', ' ', ' ', 'O', ' ']
+      expect(game_logic.return_winner_symbol(array)).to eq('O')
+    end
+  end
+
+  describe '#return_winner_symbol' do
+    it 'should return the winng symbol when a winning condition is present' do
+      array = [' ', 'O', ' ', ' ', 'O', ' ', ' ', 'O', ' ']
+      expect(game_logic.return_winner_symbol(array)).not_to eq('X')
     end
   end
 end

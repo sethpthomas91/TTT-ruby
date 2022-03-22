@@ -1,4 +1,6 @@
 require_relative '../lib/game_setup'
+require_relative '../lib/computer_player'
+require 'stringio'
 
 RSpec.describe GameSetup do
   let(:game_setup) { GameSetup.new }
@@ -17,26 +19,20 @@ RSpec.describe GameSetup do
     end
   end
 
-  describe '#human_vs_computer_builder' do
-    it 'should build set the second player' do
-      game_setup.human_vs_computer_builder
-      expect(game_setup.player_two.is_computer).to eq(true)
+  describe '#return_user_input' do
+    it 'should recieve user input and return that user input' do
+      allow($stdin).to receive(:gets).and_return('1')
+      something = $stdin.gets 
+      expect(something).to eq('1')
     end
   end
 
-  describe '#human_vs_computer' do
-    it 'should build set the second player as a computer when given 1' do
-      game_setup.stub(gets: '1')
-      game_setup.human_vs_computer_builder
-      expect(game_setup.player_two.is_computer).to eq(true)
+  describe '#set_unbeatable_computer' do
+    it 'should set the computer player as unbeatable' do
+      game_setup = GameSetup.new
+      computer_player = ComputerPlayer.new
+      game_setup.set_unbeatable_computer(computer_player)
+      expect(computer_player.is_unbeatable).to eq(true)
     end
   end
-
-  # describe '#human_vs_computer' do
-  #   it 'should build set the second player as a human when given 2' do
-  #     game_setup.stub(gets: '2')
-  #     game_setup.human_vs_computer_builder
-  #     expect(game_setup.player_two.is_computer).to eq(false)
-  #   end
-  # end
 end

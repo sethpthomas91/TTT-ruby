@@ -41,20 +41,27 @@ class GameSetup
     @player_two = HumanPlayer.new('O')
   end
 
+  def return_user_input
+   input = gets.chomp
+   input
+  end
+
   def human_vs_computer_builder
     @player_one = HumanPlayer.new
     @player_two = ComputerPlayer.new
-    @player_two.make_unbeatable
+    computer_difficulty_setter(@player_two)
   end
 
   def computer_vs_computer_builder
     @player_one = ComputerPlayer.new('X')
+    computer_difficulty_setter(@player_one)
     @player_two = ComputerPlayer.new
+    computer_difficulty_setter(@player_two)
   end
 
   def computer_vs_human_builder
     @player_one = ComputerPlayer.new('X')
-    @player_one.make_unbeatable
+    computer_difficulty_setter(@player_one)
     @player_two = HumanPlayer.new('O')
   end
 
@@ -66,6 +73,24 @@ class GameSetup
       human_vs_computer_builder
     else
       computer_vs_human_builder
+    end
+  end
+
+  def set_unbeatable_computer(player)
+    player.make_unbeatable
+  end
+
+  def computer_difficulty_setter(player)
+    loop do
+      ui.prompt_set_unbeatable
+      user_input = ui.binary_choice_input
+      case user_input
+      when 1
+        set_unbeatable_computer(player)
+        break
+      when 2
+        break
+      end
     end
   end
 

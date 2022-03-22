@@ -86,12 +86,6 @@ class Game
     game_logic.draw?(symbol_arr)
   end
 
-  minimax_scoring = {
-    'unbeatable_win' => 1,
-    'draw' => 0,
-    'unbeatable_loss' => -1
-  }
-
   def best_move(board, maximizing_player, minimizing_player)
     best_score = -100
     move = nil
@@ -100,24 +94,24 @@ class Game
 
       cell_number = cell.grid_number
       board.player_move_at(maximizing_player, cell_number)
-      score = minimax(board, 0, false, maximizing_player, minimizing_player)
+      score = minimax(board, false, maximizing_player, minimizing_player)
       board.player_undo_move_at(cell_number)
-      if score > best_score
-        best_score = score
-        move = cell_number
-      end
+      next unless score > best_score
+
+      best_score = score
+      move = cell_number
     end
     move
   end
 
-  def minimax(current_board, depth, is_maximizing, maximizing_player, minimizing_player)
+  def minimax(current_board, is_maximizing, maximizing_player, minimizing_player)
     symbol_arr = current_board.make_symbol_arr
-    if game_logic.draw?(symbol_arr)
-      return 0
+    if game_logic.return_winner_symbol(symbol_arr) == minimizing_player.marker
+      return -10
     elsif game_logic.return_winner_symbol(symbol_arr) == maximizing_player.marker
-      return 1
-    elsif game_logic.return_winner_symbol(symbol_arr) == minimizing_player.marker
-      return -1
+      return 10
+    elsif game_logic.draw?(symbol_arr)
+      return 0
     end
 
     if is_maximizing
@@ -126,9 +120,9 @@ class Game
         next if cell.symbol?
 
         cell_number = cell.grid_number
-        board.player_move_at(maximizing_player, cell_number)
-        score = minimax(board, depth + 1, false, maximizing_player, minimizing_player)
-        board.player_undo_move_at(cell_number)
+        current_board.player_move_at(maximizing_player, cell_number)
+        score = minimax(current_board, false, maximizing_player, minimizing_player)
+        current_board.player_undo_move_at(cell_number)
         best_score = [score, best_score].max
       end
       best_score
@@ -138,9 +132,9 @@ class Game
         next if cell.symbol?
 
         cell_number = cell.grid_number
-        board.player_move_at(minimizing_player, cell_number)
-        score = minimax(board, depth + 1, true, maximizing_player, minimizing_player)
-        board.player_undo_move_at(cell_number)
+        current_board.player_move_at(minimizing_player, cell_number)
+        score = minimax(current_board, true, maximizing_player, minimizing_player)
+        current_board.player_undo_move_at(cell_number)
         best_score = [score, best_score].min
       end
       best_score

@@ -33,6 +33,24 @@ class UI
     user_integer
   end
 
+  def binary_choice_input
+    while true
+      user_input = gets.chomp
+      user_integer = input_to_int(user_input)
+      break if [1, 2].include?(user_integer)
+
+      prompt_invalid_menu_selection
+    end
+    user_integer
+  end
+
+  def prompt_set_unbeatable
+    puts "Do you want the computer to be unbeatable?
+1. yes
+2. no
+"
+  end
+
   def prompt_play_first_question
     print "Do you want to play first?
 1. yes

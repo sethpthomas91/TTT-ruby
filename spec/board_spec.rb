@@ -40,4 +40,26 @@ RSpec.describe Board do
       expect(board.valid_move?(1)).to eq(true)
     end
   end
+
+  describe '#change_user_input_to_index' do
+    it 'should convert a user input of 1 to 0' do
+      expect(board.change_user_input_to_index(1)).to eq(0)
+    end
+  end
+
+  describe '#change_user_input_to_index' do
+    it 'should not convert a user input from 7 to 0' do
+      expect(board.change_user_input_to_index(7)).not_to eq(0)
+    end
+  end
+
+  describe '#player_undo_move_at' do
+    it 'should change a cell symbol at a specified grid back to blank' do
+      user_input = 1
+      player = ComputerPlayer.new('X')
+      board.player_move_at(player, user_input)
+      board.player_undo_move_at(user_input)
+      expect(board.grid[0].symbol).to eq(' ')
+    end
+  end
 end

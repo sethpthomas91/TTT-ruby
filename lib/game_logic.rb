@@ -44,7 +44,7 @@ class GameLogic
       true
     else
       false
-    end 
+    end
   end
 
   def check_for_horizontal_win(symbol_arr)
@@ -97,20 +97,17 @@ class GameLogic
 
   def return_winner_symbol(symbol_arr)
     board_rows = [
-      top_row(symbol_arr), 
-      middle_row(symbol_arr), 
+      top_row(symbol_arr),
+      middle_row(symbol_arr),
       bottom_row(symbol_arr),
-      left_vert_row(symbol_arr), 
-      mid_vert_row(symbol_arr), 
-      right_vert_row(symbol_arr), 
-      top_left_to_bottom_row(symbol_arr), 
+      left_vert_row(symbol_arr),
+      mid_vert_row(symbol_arr),
+      right_vert_row(symbol_arr),
+      top_left_to_bottom_row(symbol_arr),
       top_right_to_bottom_row(symbol_arr)
     ]
-    board_rows.each do | row |
-      if row_win?(row) 
-      return row[0]
-      end
+    board_rows.each do |row|
+      return row[0] if row_win?(row)
     end
   end
-
 end
