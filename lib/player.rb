@@ -1,9 +1,8 @@
-require_relative 'player'
-
-class HumanPlayer < Player
+# This will be the superclass for all players
+class Player
   attr_reader :marker, :is_computer
 
-  def initialize(marker = 'X', is_computer: false)
+  def initialize(marker = ' ', is_computer: false)
     @marker = marker
     @is_computer = is_computer
   end

@@ -1,6 +1,5 @@
 require_relative '../lib/UI'
 require_relative '../lib/board'
-require 'stringio'
 
 RSpec.describe UI do
   let(:ui) { UI.new }
