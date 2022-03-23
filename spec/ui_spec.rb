@@ -1,5 +1,6 @@
 require_relative '../lib/UI'
 require_relative '../lib/board'
+require 'stringio'
 
 RSpec.describe UI do
   let(:ui) { UI.new }
@@ -19,31 +20,20 @@ RSpec.describe UI do
     end
   end
 
-  describe '#get_menu_selection' do
-    it 'should allow a valid number between 1-3' do
-      ui.stub(gets: '1')
-      expect(ui.get_user_input).to eq(1)
+  describe '#return_choice_integer_between' do
+    context 'user inputs 1' do
+      it 'should return an integer of 1' do
+        expect_any_instance_of(UI).to receive(:get_input) { 1 }
+        expect(ui.return_choice_integer_between(1, 9)).to eq(1)
+      end
+    end
+
+    context 'user inputs 1' do
+      it 'should not return an integer of 2' do
+        expect_any_instance_of(UI).to receive(:get_input) { 1 }
+        expect(ui.return_choice_integer_between(1, 9)).not_to eq(2)
+      end
     end
   end
 
-  describe '#get_human_play_first_input' do
-    it 'should accept 1 as a valid input' do
-      ui.stub(gets: '1')
-      expect(ui.get_human_play_first_input).to eq(1)
-    end
-  end
-
-  describe '#get_human_play_first_input' do
-    it 'should accept 1 as a valid input' do
-      ui.stub(gets: '1')
-      expect(ui.get_human_play_first_input).not_to eq(4)
-    end
-  end
-
-  describe '#get_human_play_first_input' do
-    it 'should accept 1 as a valid input' do
-      ui.stub(gets: '2')
-      expect(ui.get_human_play_first_input).to eq(2)
-    end
-  end
 end

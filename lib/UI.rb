@@ -1,47 +1,26 @@
 # this class will display messages to the user
 class UI
-  def get_user_input
-    while true
-      user_input = gets.chomp
-      user_integer = input_to_int(user_input)
-      break if valid_input(user_integer)
+  def get_input
+    user_input = gets.chomp
+  end
 
-      prompt_invalid_input
+  def return_choice_integer_between(lower_int, upper_int)
+    while true
+      user_input = get_input
+      user_integer = input_to_int(user_input)
+      break if is_valid_input_between(user_integer, lower_int, upper_int)
+
+      prompt_invalid_input(lower_int, upper_int)
     end
     user_integer
   end
 
-  def get_menu_selection
-    while true
-      user_input = gets.chomp
-      user_integer = input_to_int(user_input)
-      break if user_integer < 5 && user_integer.positive?
-
-      prompt_invalid_menu_selection
-    end
-    user_integer
+  def is_valid_input_between(integer, lower_int, upper_int)
+    integer < lower_int || integer > upper_int  ? false : true
   end
 
-  def get_human_play_first_input
-    while true
-      user_input = gets.chomp
-      user_integer = input_to_int(user_input)
-      break if [1, 2].include?(user_integer)
-
-      prompt_invalid_menu_selection
-    end
-    user_integer
-  end
-
-  def binary_choice_input
-    while true
-      user_input = gets.chomp
-      user_integer = input_to_int(user_input)
-      break if [1, 2].include?(user_integer)
-
-      prompt_invalid_menu_selection
-    end
-    user_integer
+  def input_to_int(user_input)
+    user_input.to_i
   end
 
   def prompt_set_unbeatable(player)
@@ -60,14 +39,6 @@ class UI
 
   def prompt_invalid_menu_selection
     puts 'Please select a valid option'
-  end
-
-  def input_to_int(user_input)
-    user_input.to_i
-  end
-
-  def valid_input(integer)
-    integer > 9 || integer < 1 ? false : true
   end
 
   def welcome_message
@@ -107,12 +78,12 @@ Please make a selection from the choices below:
     puts 'Game draw!'
   end
 
-  def prompt_invalid_space
-    puts 'Please enter a valid space'
+  def prompt_invalid_input(lower_int, upper_int)
+    puts "Please enter a valid selection between #{lower_int} and #{upper_int}"
   end
 
-  def prompt_invalid_input
-    puts 'Please enter a number from 1-9'
+  def prompt_invalid_space
+    puts "Please enter a valid move"
   end
 
   def exit_message

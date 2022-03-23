@@ -20,22 +20,35 @@ RSpec.describe GameSetup do
   end
 
   describe '#return_user_input' do
-    it 'should recieve user input and return that user input' do
+    it 'should receive user input and return that user input' do
       allow($stdin).to receive(:gets).and_return('1')
       something = $stdin.gets
       expect(something).to eq('1')
     end
   end
-# FAILING TEST BELOW
+
   describe '#computer_difficulty_setter' do
-    it 'should recieve user input and set player to ubeatable' do
-      allow($stdin).to receive(:gets).and_return('1')
-      player = ComputerPlayer.new
-      allow(game_setup.computer_difficulty_setter(player)).to receive($stdin) { '1' }
-      expect(player.is_unbeatable).to eq(true)
+    context 'user inputs 1' do
+      it 'should set the palyer to unbeatable' do
+        player = ComputerPlayer.new
+        expect_any_instance_of(UI).to receive(:prompt_set_unbeatable).with(player) 
+        expect_any_instance_of(UI).to receive(:return_choice_integer_between) { 1 } 
+        game_setup.computer_difficulty_setter(player)
+        expect(player.is_unbeatable).to eq(true)
+      end
     end
+
+    context 'user inputs 2' do
+      it 'should set the player to unbeatable' do
+        player = ComputerPlayer.new
+        expect_any_instance_of(UI).to receive(:prompt_set_unbeatable).with(player) 
+        expect_any_instance_of(UI).to receive(:return_choice_integer_between) { 2 } 
+        game_setup.computer_difficulty_setter(player)
+        expect(player.is_unbeatable).to eq(false)
+      end
+    end  
   end
-# FAILING TEST ABOVE
+
   describe '#set_unbeatable_computer' do
     it 'should set the computer player as unbeatable' do
       game_setup = GameSetup.new
@@ -44,4 +57,25 @@ RSpec.describe GameSetup do
       expect(computer_player.is_unbeatable).to eq(true)
     end
   end
+
+  describe '#human_vs_computer' do
+    context 'user inputs 1' do
+      it 'should set player one as a human' do
+        expect_any_instance_of(UI).to receive(:return_choice_integer_between) { 1 } 
+        expect_any_instance_of(UI).to receive(:return_choice_integer_between) { 2 } 
+        game_setup.human_vs_computer
+        expect(game_setup.player_one.is_computer).to eq(false)
+      end
+    end  
+
+    context 'user inputs 2' do
+      it 'should set player one as a computer' do
+        expect_any_instance_of(UI).to receive(:return_choice_integer_between) { 2 } 
+        expect_any_instance_of(UI).to receive(:return_choice_integer_between) { 2 } 
+        game_setup.human_vs_computer
+        expect(game_setup.player_one.is_computer).to eq(true)
+      end
+    end  
+  end
+
 end

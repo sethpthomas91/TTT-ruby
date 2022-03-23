@@ -19,7 +19,7 @@ class GameSetup
     ui.welcome_message
     loop do
       ui.game_selection_prompt
-      user_input = ui.get_menu_selection
+      user_input = ui.return_choice_integer_between(1, 4)
       case user_input
       when 1
         human_vs_human_builder
@@ -68,7 +68,7 @@ class GameSetup
   def human_vs_computer
     ui.clear_terminal_screen
     ui.prompt_play_first_question
-    user_input = ui.get_human_play_first_input
+    user_input = ui.return_choice_integer_between(1, 2)
     if user_input == 1
       human_vs_computer_builder
     else
@@ -83,7 +83,7 @@ class GameSetup
   def computer_difficulty_setter(player)
     loop do
       ui.prompt_set_unbeatable(player)
-      user_input = ui.binary_choice_input
+      user_input = ui.return_choice_integer_between(1,2)
       case user_input
       when 1
         set_unbeatable_computer(player)
