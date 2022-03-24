@@ -1,4 +1,4 @@
-# Class that will hold all of the rules and win states for the game
+# Will determine game end conditions
 class GameLogic
   attr_reader :winning_board, :draw_board
 

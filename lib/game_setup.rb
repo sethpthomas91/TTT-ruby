@@ -5,12 +5,12 @@ require_relative './UI'
 
 # This will handle game setup choices for the user
 class GameSetup
-  attr_reader :ui, :player_one, :player_two, :game
+  attr_accessor :ui, :player_one, :player_two, :game
 
   def initialize(ui = UI.new)
     @ui = ui
-    @player_one = nil
-    @player_two = nil
+    @player_one = player_one
+    @player_two = player_two
     @game = nil
   end
 

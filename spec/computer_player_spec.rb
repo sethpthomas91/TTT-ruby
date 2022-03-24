@@ -1,4 +1,5 @@
 require_relative '../lib/computer_player'
+require_relative '../lib/board'
 
 RSpec.describe ComputerPlayer do
   let(:computer_player) { ComputerPlayer.new }
@@ -26,6 +27,18 @@ RSpec.describe ComputerPlayer do
     it 'should change the setting of the computer to unbeatable' do
       computer_player.make_unbeatable
       expect(computer_player.is_unbeatable).to eq(true)
+    end
+  end
+
+  describe '#best_move' do
+
+    context 'when the computer is set to unbeatable and computer is making the first move' do
+      it 'should return 1 as the best move' do
+        player = computer_player 
+        player.make_unbeatable
+        board = Board.new
+        expect(computer_player.best_move(board, player)).to eq(1)
+      end
     end
   end
 end

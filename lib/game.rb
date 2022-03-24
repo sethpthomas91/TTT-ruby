@@ -1,8 +1,6 @@
 require_relative './board'
 require_relative './UI'
 require_relative './game_logic'
-require_relative './computer_player'
-require_relative './human_player'
 
 # this class will wrap the board, UI together
 class Game
@@ -28,18 +26,18 @@ class Game
 
   def run_game_loop
     loop do
-      turn(@player_one)
-      break if end_move?(@player_one) == true
+      turn(board: board, player: player_one)
+      break if end_move?(player_one) == true
 
-      turn(@player_two)
-      break if end_move?(@player_two) == true
+      turn(board: board, player: player_two)
+      break if end_move?(player_two) == true
     end
   end
 
-  def turn(player)
+  def turn(board:, player:)
     ui.turn_start(board, player)
     if player.is_computer == true
-      user_input = player.move(board, player)
+      user_input = player.move(maximizing_player: player, board: board)
       ui.computer_turn_message
     else
       user_input = ui.return_choice_integer_between(1, 9)

@@ -16,7 +16,7 @@ class UI
   end
 
   def is_valid_input_between(integer, lower_int, upper_int)
-    integer < lower_int || integer > upper_int ? false : true
+    integer < lower_int || integer > upper_int  ? false : true
   end
 
   def input_to_int(user_input)
@@ -83,7 +83,7 @@ Please make a selection from the choices below:
   end
 
   def prompt_invalid_space
-    puts 'Please enter a valid move'
+    puts "Please enter a valid move"
   end
 
   def exit_message
