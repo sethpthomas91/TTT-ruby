@@ -62,4 +62,13 @@ RSpec.describe Board do
       expect(board.grid[0].symbol).to eq(' ')
     end
   end
+
+  describe '#generate_available_moves' do
+    context 'given a new board with no moves' do
+      it 'should return an array of numbers representing all remaining valid moves' do
+        board = Board.new
+        expect(board.generate_available_moves).to eq([1, 2, 3, 4, 5, 6, 7, 8, 9])
+      end
+    end
+  end
 end

@@ -26,37 +26,23 @@ class Game
     user_input
   end
 
-  def check_is_valid_computer_move(computer_input)
-    valid_move = board.valid_move?(computer_input)
-    while valid_move == false
-      computer_input = rand(1..9)
-      valid_move = board.valid_move?(computer_input)
-    end
-    computer_input
-  end
-
   def run_game_loop
     loop do
-      turn(@player_one, @player_two)
+      turn(@player_one)
       break if end_move?(@player_one) == true
 
-      turn(@player_two, @player_one)
+      turn(@player_two)
       break if end_move?(@player_two) == true
     end
   end
 
-  def turn(player, other_player)
+  def turn(player)
     ui.turn_start(board, player)
     if player.is_computer == true
-      if player.is_unbeatable
-        user_input = player.best_move(board, player, other_player)
-      elsif player.is_unbeatable == false
-        user_input = player.random_move
-        user_input = check_is_valid_computer_move(user_input)
-      end
+      user_input = player.move(board, player)
       ui.computer_turn_message
     else
-      user_input = ui.return_choice_integer_between(1,9)
+      user_input = ui.return_choice_integer_between(1, 9)
       user_input = check_is_valid_human_move(user_input)
     end
     board.player_move_at(player, user_input)

@@ -83,7 +83,7 @@ class GameSetup
   def computer_difficulty_setter(player)
     loop do
       ui.prompt_set_unbeatable(player)
-      user_input = ui.return_choice_integer_between(1,2)
+      user_input = ui.return_choice_integer_between(1, 2)
       case user_input
       when 1
         set_unbeatable_computer(player)

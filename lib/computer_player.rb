@@ -16,11 +16,17 @@ class ComputerPlayer < Player
     @is_unbeatable = true
   end
 
-  def random_move
-    rand(1..9)
+  def random_move(moves_left)
+    moves_left.sample
   end
 
-  def best_move(board, maximizing_player, minimizing_player)
+  def move(board, maximizing_player)
+    is_unbeatable ? best_move(board, maximizing_player) : random_move(board.generate_available_moves)
+  end
+
+  def best_move(board, maximizing_player)
+    minimizing_player = ComputerPlayer.new
+    maximizing_player.marker == 'X' ? minimizing_player.assign_marker_as('O') : minimizing_player.assign_marker_as('X')
     best_score = -100
     move = nil
     board.grid.each do |cell|

@@ -21,8 +21,8 @@ class Board
   end
 
   def fetch_cell(user_input)
-    index = user_input - 1
-    @grid[index]
+    grid_index = change_user_input_to_index(user_input)
+    @grid[grid_index]
   end
 
   def change_user_input_to_index(user_num_input)
@@ -38,8 +38,8 @@ class Board
   end
 
   def valid_move?(user_input)
-    index = user_input - 1
-    !@grid[index].symbol?
+    grid_index = change_user_input_to_index(user_input)
+    !@grid[grid_index].symbol?
   end
 
   def player_move_at(player, user_input)
@@ -51,5 +51,13 @@ class Board
   def player_undo_move_at(user_input)
     grid_index = change_user_input_to_index(user_input)
     @grid[grid_index].remove_symbol
+  end
+
+  def generate_available_moves
+    available_moves = []
+    @grid.each do |cell|
+      available_moves << cell.grid_number if cell.symbol? == false
+    end
+    available_moves
   end
 end

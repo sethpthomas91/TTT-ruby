@@ -34,5 +34,4 @@ RSpec.describe UI do
       end
     end
   end
-
 end

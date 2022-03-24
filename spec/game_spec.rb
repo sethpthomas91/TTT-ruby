@@ -10,12 +10,6 @@ RSpec.describe Game do
     end
   end
 
-  describe '#check_is_valid_computer_move' do
-    it 'should allow a user to play in a valid space' do
-      expect(game.check_is_valid_computer_move(1)).to eq(1)
-    end
-  end
-
   describe '#end_move?' do
     it 'should return false if the board does not have an end condition' do
       expect(game.end_move?(game.player_one)).to eq(false)
