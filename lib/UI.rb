@@ -123,7 +123,7 @@ Please make a selection from the choices below:
   end
 
   def computer_delay
-    sleep(rand(1..2))
+    sleep(rand(0..1))
   end
 
   def computer_turn_message

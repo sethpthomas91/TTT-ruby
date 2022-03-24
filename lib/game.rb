@@ -49,7 +49,7 @@ class Game
     ui.turn_start(board, player)
     if player.is_computer == true
       if player.is_unbeatable
-        user_input = best_move(board, player, other_player)
+        user_input = player.best_move(board, player, other_player)
       elsif player.is_unbeatable == false
         user_input = player.random_move
         user_input = check_is_valid_computer_move(user_input)
@@ -84,59 +84,5 @@ class Game
 
   def draw_play?(symbol_arr)
     game_logic.draw?(symbol_arr)
-  end
-
-  def best_move(board, maximizing_player, minimizing_player)
-    best_score = -100
-    move = nil
-    board.grid.each do |cell|
-      next if cell.symbol?
-
-      cell_number = cell.grid_number
-      board.player_move_at(maximizing_player, cell_number)
-      score = minimax(board, false, maximizing_player, minimizing_player)
-      board.player_undo_move_at(cell_number)
-      next unless score > best_score
-
-      best_score = score
-      move = cell_number
-    end
-    move
-  end
-
-  def minimax(current_board, is_maximizing, maximizing_player, minimizing_player)
-    symbol_arr = current_board.make_symbol_arr
-    if game_logic.return_winner_symbol(symbol_arr) == minimizing_player.marker
-      return -10
-    elsif game_logic.return_winner_symbol(symbol_arr) == maximizing_player.marker
-      return 10
-    elsif game_logic.draw?(symbol_arr)
-      return 0
-    end
-
-    if is_maximizing
-      best_score = -100
-      current_board.grid.each do |cell|
-        next if cell.symbol?
-
-        cell_number = cell.grid_number
-        current_board.player_move_at(maximizing_player, cell_number)
-        score = minimax(current_board, false, maximizing_player, minimizing_player)
-        current_board.player_undo_move_at(cell_number)
-        best_score = [score, best_score].max
-      end
-    else
-      best_score = 100
-      current_board.grid.each do |cell|
-        next if cell.symbol?
-
-        cell_number = cell.grid_number
-        current_board.player_move_at(minimizing_player, cell_number)
-        score = minimax(current_board, true, maximizing_player, minimizing_player)
-        current_board.player_undo_move_at(cell_number)
-        best_score = [score, best_score].min
-      end
-    end
-    best_score
   end
 end
