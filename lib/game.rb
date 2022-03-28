@@ -37,10 +37,10 @@ class Game
   def turn(board:, player:)
     ui.turn_start(board, player)
     if player.is_computer == true
-      user_input = player.move(maximizing_player: player, board: board)
+      user_input = player.move(board: board)
       ui.computer_turn_message
     else
-      user_input = player.move(maximizing_player: player, board: board)
+      user_input = player.move(board: board)
     end
     board.player_move_at(player, user_input)
   end

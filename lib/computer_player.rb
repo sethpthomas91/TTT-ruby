@@ -20,11 +20,12 @@ class ComputerPlayer < Player
     moves_left.sample
   end
 
-  def move(board:, maximizing_player:)
-    is_unbeatable ? best_move(board, maximizing_player) : random_move(board.generate_available_moves)
+  def move(board:)
+    is_unbeatable ? best_move(board) : random_move(board.generate_available_moves)
   end
 
-  def best_move(board, maximizing_player)
+  def best_move(board)
+    maximizing_player = self
     minimizing_player = ComputerPlayer.new
     marker == 'X' ? minimizing_player.assign_marker_as('O') : minimizing_player.assign_marker_as('X')
     best_score = -100

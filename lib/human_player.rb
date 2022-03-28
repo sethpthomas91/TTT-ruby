@@ -9,7 +9,7 @@ class HumanPlayer < Player
     @human_game_interface = HumanGameInterface.new
   end
 
-  def move(board:, maximizing_player:)
+  def move(board:)
     user_input = get_integer_between(1, 9)
     user_input = check_is_valid_human_move(user_input: user_input, board:board)
   end
