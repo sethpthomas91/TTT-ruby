@@ -19,18 +19,28 @@ RSpec.describe UI do
     end
   end
 
-  describe '#return_choice_integer_between' do
+  describe '#get_integer_between' do
     context 'user inputs 1' do
       it 'should return an integer of 1' do
         expect_any_instance_of(UI).to receive(:get_input) { 1 }
-        expect(ui.return_choice_integer_between(1, 9)).to eq(1)
+        expect(ui.get_integer_between(1, 9)).to eq(1)
       end
     end
 
     context 'user inputs 1' do
       it 'should not return an integer of 2' do
         expect_any_instance_of(UI).to receive(:get_input) { 1 }
-        expect(ui.return_choice_integer_between(1, 9)).not_to eq(2)
+        expect(ui.get_integer_between(1, 9)).not_to eq(2)
+      end
+    end
+
+    context 'receives a range of invalid inputs, but only returns the valid input' do
+      it 'should not return an integer of 2' do
+        expect_any_instance_of(UI).to receive(:get_input) { 0 }
+        expect_any_instance_of(UI).to receive(:get_input) { -3 }
+        expect_any_instance_of(UI).to receive(:get_input) { "hello" }
+        expect_any_instance_of(UI).to receive(:get_input) { 5 }
+        expect(ui.get_integer_between(1, 9)).to eq(5)
       end
     end
   end

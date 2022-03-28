@@ -1,10 +1,10 @@
 # this class will display messages to the user
 class UI
   def get_input
-    user_input = gets.chomp
+    gets.chomp
   end
 
-  def return_choice_integer_between(lower_int, upper_int)
+  def get_integer_between(lower_int, upper_int)
     while true
       user_input = get_input
       user_integer = input_to_int(user_input)
@@ -16,7 +16,7 @@ class UI
   end
 
   def is_valid_input_between(integer, lower_int, upper_int)
-    integer < lower_int || integer > upper_int  ? false : true
+    integer < lower_int || integer > upper_int ? false : true
   end
 
   def input_to_int(user_input)
@@ -82,8 +82,8 @@ Please make a selection from the choices below:
     puts "Please enter a valid selection between #{lower_int} and #{upper_int}"
   end
 
-  def prompt_invalid_space
-    puts "Please enter a valid move"
+  def prompt_invalid_space(invalid_user_input)
+    puts "#{invalid_user_input} is already played. \nPlease enter a valid move"
   end
 
   def exit_message

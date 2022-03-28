@@ -55,7 +55,7 @@ class ComputerPlayer < Player
     end
 
     if is_maximizing
-      best_score = -100
+      best_score = -Float::INFINITY
       current_board.grid.each do |cell|
         next if cell.symbol?
 

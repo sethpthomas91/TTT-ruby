@@ -28,6 +28,8 @@ RSpec.describe ComputerPlayer do
       computer_player.make_unbeatable
       expect(computer_player.is_unbeatable).to eq(true)
     end
+    
+    context 'when both players are set to unbeatable computer players the '
   end
 
   describe '#best_move' do

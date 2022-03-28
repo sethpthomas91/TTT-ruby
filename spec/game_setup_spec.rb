@@ -32,7 +32,7 @@ RSpec.describe GameSetup do
       it 'should set the palyer to unbeatable' do
         player = ComputerPlayer.new
         expect_any_instance_of(UI).to receive(:prompt_set_unbeatable).with(player)
-        expect_any_instance_of(UI).to receive(:return_choice_integer_between) { 1 }
+        expect_any_instance_of(UI).to receive(:get_integer_between) { 1 }
         game_setup.computer_difficulty_setter(player)
         expect(player.is_unbeatable).to eq(true)
       end
@@ -42,7 +42,7 @@ RSpec.describe GameSetup do
       it 'should set the player to unbeatable' do
         player = ComputerPlayer.new
         expect_any_instance_of(UI).to receive(:prompt_set_unbeatable).with(player)
-        expect_any_instance_of(UI).to receive(:return_choice_integer_between) { 2 }
+        expect_any_instance_of(UI).to receive(:get_integer_between) { 2 }
         game_setup.computer_difficulty_setter(player)
         expect(player.is_unbeatable).to eq(false)
       end
@@ -61,8 +61,8 @@ RSpec.describe GameSetup do
   describe '#human_vs_computer' do
     context 'user inputs 1' do
       it 'should set player one as a human' do
-        expect_any_instance_of(UI).to receive(:return_choice_integer_between) { 1 }
-        expect_any_instance_of(UI).to receive(:return_choice_integer_between) { 2 }
+        expect_any_instance_of(UI).to receive(:get_integer_between) { 1 }
+        expect_any_instance_of(UI).to receive(:get_integer_between) { 2 }
         game_setup.human_vs_computer
         expect(game_setup.player_one.is_computer).to eq(false)
       end
@@ -70,8 +70,8 @@ RSpec.describe GameSetup do
 
     context 'user inputs 2' do
       it 'should set player one as a computer' do
-        expect_any_instance_of(UI).to receive(:return_choice_integer_between) { 2 }
-        expect_any_instance_of(UI).to receive(:return_choice_integer_between) { 2 }
+        expect_any_instance_of(UI).to receive(:get_integer_between) { 2 }
+        expect_any_instance_of(UI).to receive(:get_integer_between) { 2 }
         game_setup.human_vs_computer
         expect(game_setup.player_one.is_computer).to eq(true)
       end

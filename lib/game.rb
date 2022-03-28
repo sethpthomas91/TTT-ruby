@@ -17,8 +17,8 @@ class Game
   def check_is_valid_human_move(user_input)
     valid_move = board.valid_move?(user_input)
     while valid_move == false
-      ui.prompt_invalid_space
-      user_input = ui.return_choice_integer_between(1, 9)
+      ui.prompt_invalid_space(user_input)
+      user_input = ui.get_integer_between(1, 9)
       valid_move = board.valid_move?(user_input)
     end
     user_input
@@ -40,7 +40,7 @@ class Game
       user_input = player.move(maximizing_player: player, board: board)
       ui.computer_turn_message
     else
-      user_input = ui.return_choice_integer_between(1, 9)
+      user_input = ui.get_integer_between(1, 9)
       user_input = check_is_valid_human_move(user_input)
     end
     board.player_move_at(player, user_input)
