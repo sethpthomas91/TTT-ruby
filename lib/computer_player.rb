@@ -80,4 +80,24 @@ class ComputerPlayer < Player
     end
     best_score
   end
+
+  def computer_thinking_message
+    thinking_messages = [
+      "\nThinking...",
+      "\nHmmmmmmm...",
+      "\nClever move...",
+      "\nThis is my game!",
+      "\nWait...."
+    ]
+    puts thinking_messages[rand(5)]
+  end
+
+  def computer_delay
+    sleep(rand(0..1))
+  end
+
+  def turn_message
+    computer_thinking_message
+    computer_delay
+  end
 end
