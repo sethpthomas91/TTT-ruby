@@ -31,7 +31,7 @@ class ComputerPlayer < Player
     best_score = -Float::INFINITY
     move = nil
     available_moves = board.generate_available_moves
-    available_moves.each do | next_move |
+    available_moves.each do |next_move|
       board.player_move_at(maximizing_player, next_move)
       score = minimax(board, false, maximizing_player, minimizing_player)
       board.player_undo_move_at(next_move)
@@ -53,11 +53,11 @@ class ComputerPlayer < Player
     elsif game_logic.draw?(symbol_arr)
       return 0
     end
-    
+
     if is_maximizing
       best_score = -Float::INFINITY
       available_moves = current_board.generate_available_moves
-      available_moves.each do | next_move |
+      available_moves.each do |next_move|
         current_board.player_move_at(maximizing_player, next_move)
         score = minimax(current_board, false, maximizing_player, minimizing_player)
         current_board.player_undo_move_at(next_move)
@@ -66,12 +66,12 @@ class ComputerPlayer < Player
     else
       best_score = Float::INFINITY
       available_moves = current_board.generate_available_moves
-      available_moves.each do | next_move |
+      available_moves.each do |next_move|
         current_board.player_move_at(minimizing_player, next_move)
         score = minimax(current_board, true, maximizing_player, minimizing_player)
         current_board.player_undo_move_at(next_move)
         best_score = [score, best_score].min
-      end 
+      end
     end
     best_score
   end

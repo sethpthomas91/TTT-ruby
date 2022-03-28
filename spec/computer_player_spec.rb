@@ -31,10 +31,9 @@ RSpec.describe ComputerPlayer do
   end
 
   describe '#best_move' do
-
     context 'when the computer is set to unbeatable and computer is making the first move' do
       it 'should return 1 as the best move' do
-        player = computer_player 
+        player = computer_player
         player.make_unbeatable
         board = Board.new
         expect(computer_player.best_move(board)).to eq(1)
