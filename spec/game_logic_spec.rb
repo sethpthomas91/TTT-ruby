@@ -49,6 +49,13 @@ RSpec.describe GameLogic do
     end
   end
 
+  describe '#check_for_diagonal_win' do
+    it 'should return true when a player has won the game on a diagonal line' do
+      array = ['O', ' ', ' ', ' ', 'O', ' ', ' ', ' ', 'O']
+      expect(game_logic.check_for_diagonal_win(array)).to eq(true)
+    end
+  end
+
   describe '#check_for_win' do
     it 'should return true when a winning condition is present' do
       array = [' ', 'O', ' ', ' ', 'O', ' ', ' ', 'O', ' ']
@@ -57,23 +64,51 @@ RSpec.describe GameLogic do
   end
 
   describe '#check_for_win' do
-    it 'should return true when a winning condition is present' do
+    it 'should return false when no winning condition is present' do
       array = [' ', ' ', ' ', ' ', 'O', ' ', ' ', 'O', ' ']
       expect(game_logic.check_for_win(array)).to eq(false)
     end
   end
 
-  describe '#check_for_draw' do
+  describe '#draw?' do
     it 'should return false when no draw is present' do
       array = [' ', ' ', ' ', ' ', 'O', ' ', ' ', 'O', ' ']
       expect(game_logic.draw?(array)).to eq(false)
     end
   end
 
-  describe '#check_for_draw' do
+  describe '#draw?' do
     it 'should return false when no draw is present' do
       array = %w[O X O O X O X O X]
       expect(game_logic.draw?(array)).to eq(true)
+    end
+  end
+
+  describe '#return_winner_symbol' do
+    it 'should return the winng symbol when a winning condition is present' do
+      array = [' ', 'O', ' ', ' ', 'O', ' ', ' ', 'O', ' ']
+      expect(game_logic.return_winner_symbol(array)).to eq('O')
+    end
+  end
+
+  describe '#return_winner_symbol' do
+    it 'should return the winng symbol when a winning condition is present' do
+      array = [' ', 'O', ' ', ' ', 'O', ' ', ' ', 'O', ' ']
+      expect(game_logic.return_winner_symbol(array)).not_to eq('X')
+    end
+  end
+
+  describe '#arr_all_same' do
+    it 'should return true if all symbols in the array are the same' do
+      array = [' ', ' ', ' ']
+      expect(game_logic.arr_all_same(array)).to eq(true)
+    end
+  end
+
+  describe '#arr_all_same' do
+    it 'should return false if all symbols in the array are not the same' do
+      array = ['X', ' ', ' ']
+      expect(game_logic.arr_all_same(array)).to eq(false)
     end
   end
 end

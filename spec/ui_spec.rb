@@ -19,31 +19,29 @@ RSpec.describe UI do
     end
   end
 
-  describe '#get_menu_selection' do
-    it 'should allow a valid number between 1-3' do
-      ui.stub(gets: '1')
-      expect(ui.get_user_input).to eq(1)
+  describe '#get_integer_between' do
+    context 'user inputs 1' do
+      it 'should return an integer of 1' do
+        expect_any_instance_of(UI).to receive(:get_input) { 1 }
+        expect(ui.get_integer_between(1, 9)).to eq(1)
+      end
     end
-  end
 
-  describe '#get_human_play_first_input' do
-    it 'should accept 1 as a valid input' do
-      ui.stub(gets: '1')
-      expect(ui.get_human_play_first_input).to eq(1)
+    context 'user inputs 1' do
+      it 'should not return an integer of 2' do
+        expect_any_instance_of(UI).to receive(:get_input) { 1 }
+        expect(ui.get_integer_between(1, 9)).not_to eq(2)
+      end
     end
-  end
 
-  describe '#get_human_play_first_input' do
-    it 'should accept 1 as a valid input' do
-      ui.stub(gets: '1')
-      expect(ui.get_human_play_first_input).not_to eq(4)
-    end
-  end
-
-  describe '#get_human_play_first_input' do
-    it 'should accept 1 as a valid input' do
-      ui.stub(gets: '2')
-      expect(ui.get_human_play_first_input).to eq(2)
+    context 'receives a range of invalid inputs, but only returns the valid input' do
+      it 'should not return an integer of 2' do
+        expect_any_instance_of(UI).to receive(:get_input) { 0 }
+        expect_any_instance_of(UI).to receive(:get_input) { -3 }
+        expect_any_instance_of(UI).to receive(:get_input) { "hello" }
+        expect_any_instance_of(UI).to receive(:get_input) { 5 }
+        expect(ui.get_integer_between(1, 9)).to eq(5)
+      end
     end
   end
 end

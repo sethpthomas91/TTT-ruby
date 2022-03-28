@@ -1,36 +1,33 @@
 # this class will display messages to the user
 class UI
-  def get_user_input
-    while true
-      user_input = gets.chomp
-      user_integer = input_to_int(user_input)
-      break if valid_input(user_integer)
+  def get_input
+    gets.chomp
+  end
 
-      prompt_invalid_input
+  def get_integer_between(lower_int, upper_int)
+    while true
+      user_input = get_input
+      user_integer = input_to_int(user_input)
+      break if is_valid_input_between(user_integer, lower_int, upper_int)
+
+      prompt_invalid_input(lower_int, upper_int)
     end
     user_integer
   end
 
-  def get_menu_selection
-    while true
-      user_input = gets.chomp
-      user_integer = input_to_int(user_input)
-      break if user_integer < 4 && user_integer.positive?
-
-      prompt_invalid_menu_selection
-    end
-    user_integer
+  def is_valid_input_between(integer, lower_int, upper_int)
+    integer < lower_int || integer > upper_int ? false : true
   end
 
-  def get_human_play_first_input
-    while true
-      user_input = gets.chomp
-      user_integer = input_to_int(user_input)
-      break if [1, 2].include?(user_integer)
+  def input_to_int(user_input)
+    user_input.to_i
+  end
 
-      prompt_invalid_menu_selection
-    end
-    user_integer
+  def prompt_set_unbeatable(player)
+    puts "Do you want computer player #{player.marker} to be unbeatable?
+1. yes
+2. no
+"
   end
 
   def prompt_play_first_question
@@ -44,14 +41,6 @@ class UI
     puts 'Please select a valid option'
   end
 
-  def input_to_int(user_input)
-    user_input.to_i
-  end
-
-  def valid_input(integer)
-    integer > 9 || integer < 1 ? false : true
-  end
-
   def welcome_message
     puts "Welcome to Ruby Tic-Tac-Toe\n"
   end
@@ -62,7 +51,8 @@ Please make a selection from the choices below:
 
 1. Human vs Human
 2. Human vs Computer
-3. Exit
+3. Computer vs Computer
+4. Exit
 "
   end
 
@@ -72,8 +62,8 @@ Please make a selection from the choices below:
     puts "Don't worry if you entered a wrong value, the computer will just reprompt you.\n"
   end
 
-  def prompt_for_turn
-    print 'Please enter an number that corresponds to a space: '
+  def prompt_for_turn(player)
+    puts "Player #{player.marker}, please enter an number that corresponds to a space: "
   end
 
   def clear_terminal_screen
@@ -88,12 +78,12 @@ Please make a selection from the choices below:
     puts 'Game draw!'
   end
 
-  def prompt_invalid_space
-    puts 'Please enter a valid space'
+  def prompt_invalid_input(lower_int, upper_int)
+    puts "Please enter a valid selection between #{lower_int} and #{upper_int}"
   end
 
-  def prompt_invalid_input
-    puts 'Please enter a number from 1-9'
+  def prompt_invalid_space(invalid_user_input)
+    puts "#{invalid_user_input} is already played. \nPlease enter a valid move"
   end
 
   def exit_message
@@ -110,9 +100,9 @@ Please make a selection from the choices below:
     puts ''
   end
 
-  def turn_start(board)
+  def turn_start(board, player)
     display_game_interface(board)
-    prompt_for_turn
+    prompt_for_turn(player)
   end
 
   def welcome_user
@@ -122,11 +112,18 @@ Please make a selection from the choices below:
   end
 
   def computer_thinking_message
-    puts "Thinking..."
+    thinking_messages = [
+      "\nThinking...",
+      "\nHmmmmmmm...",
+      "\nClever move...",
+      "\nThis is my game!",
+      "\nWait...."
+    ]
+    puts thinking_messages[rand(5)]
   end
 
   def computer_delay
-    sleep(rand(1..2))
+    sleep(rand(0..1))
   end
 
   def computer_turn_message

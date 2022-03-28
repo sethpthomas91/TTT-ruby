@@ -22,9 +22,7 @@ RSpec.describe Board do
       board.grid[0].change_symbol_to('O')
       board.grid[1].change_symbol_to('O')
       board.grid[2].change_symbol_to('O')
-      input = board.make_symbol_arr
-      output = ['O', 'O', 'O', ' ', ' ', ' ', ' ', ' ', ' ']
-      expect(input).to eq(output)
+      expect(board.make_symbol_arr).to eq(['O', 'O', 'O', ' ', ' ', ' ', ' ', ' ', ' '])
     end
   end
 
@@ -40,6 +38,37 @@ RSpec.describe Board do
   describe '#valid_move?' do
     it 'should return true when a cell has not been played' do
       expect(board.valid_move?(1)).to eq(true)
+    end
+  end
+
+  describe '#change_user_input_to_index' do
+    it 'should convert a user input of 1 to 0' do
+      expect(board.change_user_input_to_index(1)).to eq(0)
+    end
+  end
+
+  describe '#change_user_input_to_index' do
+    it 'should not convert a user input from 7 to 0' do
+      expect(board.change_user_input_to_index(7)).not_to eq(0)
+    end
+  end
+
+  describe '#player_undo_move_at' do
+    it 'should change a cell symbol at a specified grid back to blank' do
+      user_input = 1
+      player = ComputerPlayer.new('X')
+      board.player_move_at(player, user_input)
+      board.player_undo_move_at(user_input)
+      expect(board.grid[0].symbol).to eq(' ')
+    end
+  end
+
+  describe '#generate_available_moves' do
+    context 'given a new board with no moves' do
+      it 'should return an array of numbers representing all remaining valid moves' do
+        board = Board.new
+        expect(board.generate_available_moves).to eq([1, 2, 3, 4, 5, 6, 7, 8, 9])
+      end
     end
   end
 end

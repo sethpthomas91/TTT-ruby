@@ -2,9 +2,9 @@
 class Cell
   attr_reader :symbol, :grid_number
 
-  def initialize
-    @symbol = ' '
-    @grid_number = ''
+  def initialize(symbol = ' ', grid_number = '')
+    @symbol = symbol
+    @grid_number = grid_number
   end
 
   def change_grid_number(new_number)
@@ -12,14 +12,18 @@ class Cell
   end
 
   def symbol?
-    @symbol != ' '
+    symbol != ' '
   end
 
   def game_display
-    symbol? ? @symbol : @grid_number
+    symbol? ? symbol : grid_number
   end
 
   def change_symbol_to(new_symbol)
     @symbol = new_symbol
+  end
+
+  def remove_symbol
+    @symbol = ' '
   end
 end

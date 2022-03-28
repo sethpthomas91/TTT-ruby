@@ -1,8 +1,6 @@
 require_relative './board'
 require_relative './UI'
 require_relative './game_logic'
-require_relative './computer_player'
-require_relative './human_player'
 
 # this class will wrap the board, UI together
 class Game
@@ -19,40 +17,30 @@ class Game
   def check_is_valid_human_move(user_input)
     valid_move = board.valid_move?(user_input)
     while valid_move == false
-      ui.prompt_invalid_space
-      user_input = ui.get_user_input
+      ui.prompt_invalid_space(user_input)
+      user_input = ui.get_integer_between(1, 9)
       valid_move = board.valid_move?(user_input)
     end
     user_input
   end
 
-  def check_is_valid_computer_move(computer_input)
-    valid_move = board.valid_move?(computer_input)
-    while valid_move == false
-      computer_input = rand(1..9)
-      valid_move = board.valid_move?(computer_input)
-    end
-    computer_input
-  end
-
   def run_game_loop
     loop do
-      turn(@player_one)
-      break if end_move?(@player_one) == true
+      turn(board: board, player: player_one)
+      break if end_move?(player_one) == true
 
-      turn(@player_two)
-      break if end_move?(@player_two) == true
+      turn(board: board, player: player_two)
+      break if end_move?(player_two) == true
     end
   end
 
-  def turn(player)
-    ui.turn_start(board)
+  def turn(board:, player:)
+    ui.turn_start(board, player)
     if player.is_computer == true
-      user_input = player.random_move
-      user_input = check_is_valid_computer_move(user_input)
+      user_input = player.move(maximizing_player: player, board: board)
       ui.computer_turn_message
     else
-      user_input = ui.get_user_input
+      user_input = ui.get_integer_between(1, 9)
       user_input = check_is_valid_human_move(user_input)
     end
     board.player_move_at(player, user_input)
@@ -81,5 +69,4 @@ class Game
   def draw_play?(symbol_arr)
     game_logic.draw?(symbol_arr)
   end
-
 end
