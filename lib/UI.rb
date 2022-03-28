@@ -67,7 +67,7 @@ Please make a selection from the choices below:
   end
 
   def clear_terminal_screen
-    system 'clear'
+    # system 'clear'
   end
 
   def prompt_player_win(player)
