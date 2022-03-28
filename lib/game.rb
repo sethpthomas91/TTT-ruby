@@ -40,8 +40,7 @@ class Game
       user_input = player.move(maximizing_player: player, board: board)
       ui.computer_turn_message
     else
-      user_input = ui.get_integer_between(1, 9)
-      user_input = check_is_valid_human_move(user_input)
+      user_input = player.move(maximizing_player: player, board: board)
     end
     board.player_move_at(player, user_input)
   end

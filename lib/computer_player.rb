@@ -66,7 +66,7 @@ class ComputerPlayer < Player
         best_score = [score, best_score].max
       end
     else
-      best_score = 100
+      best_score = Float::INFINITY
       current_board.grid.each do |cell|
         next if cell.symbol?
 
