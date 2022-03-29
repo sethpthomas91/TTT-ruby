@@ -28,18 +28,15 @@ RSpec.describe ComputerPlayer do
       computer_player.make_unbeatable
       expect(computer_player.is_unbeatable).to eq(true)
     end
-    
-    context 'when both players are set to unbeatable computer players the '
   end
 
   describe '#best_move' do
-
     context 'when the computer is set to unbeatable and computer is making the first move' do
       it 'should return 1 as the best move' do
-        player = computer_player 
+        player = computer_player
         player.make_unbeatable
         board = Board.new
-        expect(computer_player.best_move(board, player)).to eq(1)
+        expect(computer_player.best_move(board)).to eq(1)
       end
     end
   end

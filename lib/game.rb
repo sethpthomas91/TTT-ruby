@@ -36,13 +36,8 @@ class Game
 
   def turn(board:, player:)
     ui.turn_start(board, player)
-    if player.is_computer == true
-      user_input = player.move(maximizing_player: player, board: board)
-      ui.computer_turn_message
-    else
-      user_input = ui.get_integer_between(1, 9)
-      user_input = check_is_valid_human_move(user_input)
-    end
+    user_input = player.move(board: board)
+    player.is_computer ? player.turn_message : false
     board.player_move_at(player, user_input)
   end
 

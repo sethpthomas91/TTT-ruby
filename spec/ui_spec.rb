@@ -38,7 +38,7 @@ RSpec.describe UI do
       it 'should not return an integer of 2' do
         expect_any_instance_of(UI).to receive(:get_input) { 0 }
         expect_any_instance_of(UI).to receive(:get_input) { -3 }
-        expect_any_instance_of(UI).to receive(:get_input) { "hello" }
+        expect_any_instance_of(UI).to receive(:get_input) { 'hello' }
         expect_any_instance_of(UI).to receive(:get_input) { 5 }
         expect(ui.get_integer_between(1, 9)).to eq(5)
       end
