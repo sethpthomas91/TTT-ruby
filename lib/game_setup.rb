@@ -1,5 +1,6 @@
 require_relative './computer_player'
 require_relative './human_player'
+require_relative './medium_computer_player'
 require_relative './game'
 require_relative './UI'
 
@@ -48,8 +49,8 @@ class GameSetup
 
   def human_vs_computer_builder
     @player_one = HumanPlayer.new
-    @player_two = ComputerPlayer.new
-    computer_difficulty_setter(@player_two)
+    @player_two = MediumComputerPlayer.new('O')
+    # computer_difficulty_setter(@player_two)
   end
 
   def computer_vs_computer_builder

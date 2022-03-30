@@ -25,6 +25,7 @@ class ComputerPlayer < Player
   end
 
   def best_move(board)
+    puts "Is this being called?"
     maximizing_player = self
     minimizing_player = ComputerPlayer.new
     marker == 'X' ? minimizing_player.assign_marker_as('O') : minimizing_player.assign_marker_as('X')
@@ -39,7 +40,6 @@ class ComputerPlayer < Player
 
       best_score = score
       move = next_move
-      puts "Better score found #{best_score} at #{move}"
     end
     move
   end
